@@ -88,8 +88,8 @@
 
   /* ── Central glow (single focused orb, breathes) ── */
   .hero-glow {
-    width: 600px;
-    height: 600px;
+    width: clamp(250px, 80vw, 600px);
+    height: clamp(250px, 80vw, 600px);
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -246,8 +246,7 @@
 
   /* ── Responsive ── */
   @media (max-width: 768px) {
-    .hero-glow { width: 300px; height: 300px; }
-    .logo-container { padding: 1rem 2rem; }
+    .logo-container { padding: 1rem 1.5rem; }
   }
 
   @media (prefers-reduced-motion: reduce) {
