@@ -1,19 +1,23 @@
 export function initNav(): void {
   const nav = document.getElementById('main-nav');
   const toggle = document.getElementById('nav-toggle');
-  const menu = document.getElementById('nav-menu');
-  if (!nav || !toggle || !menu) return;
+  const desktopMenu = document.getElementById('nav-menu');
+  const mobileMenu = document.getElementById('mobile-menu');
+  if (!nav || !toggle) return;
 
-  // Hamburger toggle
+  // Hamburger toggle — opens/closes mobile menu
   toggle.addEventListener('click', () => {
-    const isOpen = menu.classList.toggle('open');
+    if (!mobileMenu) return;
+    const isOpen = mobileMenu.classList.toggle('open');
+    toggle.classList.toggle('open', isOpen);
     toggle.setAttribute('aria-expanded', String(isOpen));
   });
 
-  // Close menu on link click
-  menu.querySelectorAll('a').forEach((link) => {
+  // Close mobile menu on link click
+  mobileMenu?.querySelectorAll('a').forEach((link) => {
     link.addEventListener('click', () => {
-      menu.classList.remove('open');
+      mobileMenu.classList.remove('open');
+      toggle.classList.remove('open');
       toggle.setAttribute('aria-expanded', 'false');
     });
   });
@@ -27,7 +31,7 @@ export function initNav(): void {
 
     // Active section highlight
     const sections = document.querySelectorAll('section[id]');
-    const links = menu.querySelectorAll('a[href^="#"]');
+    const links = (desktopMenu || mobileMenu)?.querySelectorAll('a[href^="#"]') || [];
     let currentId = '';
 
     for (const section of sections) {
