@@ -169,11 +169,7 @@ body {
 }
 
 @media (max-width: 640px) {
-  .section { padding: 1.25rem 1rem; }
-}
-
-@media (max-width: 480px) {
-  .section { padding: 1rem 0.875rem; }
+  .section { padding: 1.25rem 1.25rem; }
 }
 
 .section-header {
