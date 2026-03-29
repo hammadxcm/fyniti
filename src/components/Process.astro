@@ -1,9 +1,15 @@
 ---
 import { processSteps } from '@data/site';
 import SectionHeader from '@components/SectionHeader.astro';
-import { Search, ClipboardList, Code, CheckCircle, Rocket } from '@lucide/astro';
 
-const stepIcons = [Search, ClipboardList, Code, CheckCircle, Rocket];
+// Animated SVG icons from line-md (MIT, CSS-animated)
+const stepIcons = [
+  '/icons/animated-ui/process-search.svg',
+  '/icons/animated-ui/process-clipboard.svg',
+  '/icons/animated-ui/process-code.svg',
+  '/icons/animated-ui/process-check.svg',
+  '/icons/animated-ui/process-launch.svg',
+];
 ---
 
 <section id="process" class="section-surface" style="position: relative; overflow: hidden;">
@@ -12,7 +18,7 @@ const stepIcons = [Search, ClipboardList, Code, CheckCircle, Rocket];
 
     <div class="process-grid" id="process-grid">
       {processSteps.map((step, i) => {
-        const StepIcon = stepIcons[i];
+        const iconSrc = stepIcons[i];
         return (
           <div class="ps" style={`--i: ${i}`}>
             <div class="ps-node">
@@ -21,7 +27,7 @@ const stepIcons = [Search, ClipboardList, Code, CheckCircle, Rocket];
             <div class="ps-connector" aria-hidden="true"></div>
             <div class="ps-card glass rounded-xl">
               <div class="ps-icon">
-                {StepIcon && <StepIcon size={22} strokeWidth={1.5} />}
+                {iconSrc && <img src={iconSrc} width="22" height="22" alt="" class="ps-icon-img" loading="lazy" />}
               </div>
               <h3 class="ps-title">{step.title}</h3>
               <p class="ps-desc">{step.description}</p>
@@ -189,10 +195,21 @@ const stepIcons = [Search, ClipboardList, Code, CheckCircle, Rocket];
     }
   }
 
+  .ps-icon-img {
+    width: 22px;
+    height: 22px;
+    filter: brightness(0) saturate(100%) invert(45%) sepia(90%) saturate(500%) hue-rotate(140deg);
+    transition: transform 0.3s ease;
+  }
+
   .ps:hover .ps-icon {
     background: color-mix(in srgb, var(--color-brand) 15%, transparent);
     transform: scale(1.1);
     box-shadow: 0 0 12px -2px color-mix(in srgb, var(--color-brand) 20%, transparent);
+  }
+
+  .ps:hover .ps-icon-img {
+    transform: scale(1.15);
   }
 
   /* ── Title ── */
