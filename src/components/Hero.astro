@@ -3,48 +3,25 @@
 ---
 
 <section id="hero" class="relative flex items-center justify-center overflow-hidden bg-bg-base mt-16" style="min-height: calc(100dvh - 4rem);">
-  <!-- Particle / blood rain canvas -->
+  <!-- Canvas effects (particles, matrix rain, blood rain — theme-specific) -->
   <canvas id="hero-canvas" class="absolute inset-0 w-full h-full pointer-events-none" aria-hidden="true"></canvas>
-  <!-- Matrix rain overlay canvas -->
   <canvas id="matrix-canvas" class="absolute inset-0 w-full h-full pointer-events-none" aria-hidden="true" style="opacity:0.7;"></canvas>
 
-  <!-- Grid pattern overlay -->
-  <div class="grid-overlay absolute inset-0 pointer-events-none" aria-hidden="true"></div>
+  <!-- Subtle noise texture -->
+  <div class="hero-noise absolute inset-0 pointer-events-none" aria-hidden="true"></div>
 
-  <!-- Gradient mesh background -->
-  <div class="gradient-mesh absolute inset-0 pointer-events-none" aria-hidden="true">
-    <div class="mesh-orb mesh-orb-1"></div>
-    <div class="mesh-orb mesh-orb-2"></div>
-    <div class="mesh-orb mesh-orb-3"></div>
-  </div>
-
-  <!-- Geometric floating shapes -->
-  <div class="geo-shapes absolute inset-0 pointer-events-none overflow-hidden" aria-hidden="true">
-    <div class="shape shape-1"></div>
-    <div class="shape shape-2"></div>
-    <div class="shape shape-3"></div>
-    <div class="shape shape-4"></div>
-    <div class="shape shape-5"></div>
-  </div>
-
-  <!-- Decorative floating code snippet -->
-  <div class="code-float absolute pointer-events-none hidden lg:block" aria-hidden="true">
-    <pre class="glass rounded-lg p-4 text-xs font-mono text-text-secondary/40 leading-relaxed"><code><span class="text-brand/50">const</span> <span class="text-brand-mint/50">fyniti</span> = {`{`}
-  <span class="text-brand-light/50">innovation</span>: <span class="text-brand/50">true</span>,
-  <span class="text-brand-light/50">quality</span>: <span class="text-brand/50">'exceptional'</span>,
-  <span class="text-brand-light/50">clients</span>: <span class="text-brand/50">'worldwide'</span>
-{`}`};</code></pre>
-  </div>
+  <!-- Central glow (single, focused, breathes) -->
+  <div class="hero-glow absolute pointer-events-none" aria-hidden="true"></div>
 
   <!-- Content -->
   <div class="relative z-10 text-center px-6 max-w-4xl mx-auto">
     <!-- Greeting -->
-    <p class="hero-greeting opacity-0 font-mono text-sm md:text-base tracking-[0.15em] uppercase text-brand mb-6" data-i18n="hero.greeting">
+    <p class="hero-greeting opacity-0 font-mono text-sm md:text-base lg:text-lg tracking-[0.2em] uppercase text-brand mb-8" data-i18n="hero.greeting">
       Transforming Ideas Into Technology
     </p>
 
-    <!-- Main title with glow ring -->
-    <div class="hero-name opacity-0 mb-6" style="perspective: 1000px; display: flex; justify-content: center; align-items: center;">
+    <!-- Logo with glow ring + morph animation -->
+    <div class="hero-name opacity-0 mb-8" style="perspective: 1000px; display: flex; justify-content: center; align-items: center;">
       <div class="logo-container" id="hero-logo-tilt">
         <div class="logo-glow-ring" aria-hidden="true"></div>
         <svg class="hero-logo-svg morph-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 80" fill="currentColor" overflow="visible" aria-label="FYNITI">
@@ -61,26 +38,26 @@
     </div>
 
     <!-- Subtitle -->
-    <p class="hero-subtitle opacity-0 text-xl md:text-2xl text-text-secondary font-light tracking-wide mb-8" data-i18n="hero.subtitle">
+    <p class="hero-subtitle opacity-0 text-xl md:text-2xl lg:text-3xl text-text-secondary font-extralight tracking-wide mb-10" data-i18n="hero.subtitle">
       IT Solutions &amp; Digital Innovation
     </p>
 
     <!-- Typewriter -->
-    <div class="hero-typewriter opacity-0 flex items-center justify-center gap-1 mb-10 h-8">
+    <div class="hero-typewriter opacity-0 flex items-center justify-center gap-1 mb-12 h-8">
       <span class="font-mono text-brand text-lg" aria-hidden="true">&rsaquo; </span>
       <span id="typewriter" class="font-mono text-lg text-text-primary" role="status" aria-live="polite"></span>
       <span class="cursor font-mono text-brand text-lg" aria-hidden="true">|</span>
     </div>
 
     <!-- CTAs -->
-    <div class="hero-ctas opacity-0 flex flex-col sm:flex-row gap-4 justify-center items-center mt-10">
-      <a href="#services" class="cta-outline inline-flex items-center justify-center gap-2 px-8 py-3.5 text-sm font-medium rounded-md transition-all duration-300">
+    <div class="hero-ctas opacity-0 flex flex-col sm:flex-row gap-4 justify-center items-center">
+      <a href="#services" class="cta-outline inline-flex items-center justify-center gap-2 px-10 py-4 text-sm font-medium rounded-full transition-all duration-300">
         <span>Explore Services</span>
         <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
           <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
         </svg>
       </a>
-      <a href="#contact" class="cta-filled inline-flex items-center justify-center gap-2 px-8 py-3.5 text-sm font-medium rounded-md transition-all duration-300">
+      <a href="#contact" class="cta-filled inline-flex items-center justify-center gap-2 px-10 py-4 text-sm font-medium rounded-full transition-all duration-300">
         <span>Get in Touch</span>
         <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
           <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
@@ -102,162 +79,30 @@
 </section>
 
 <style>
-  /* ── Grid pattern overlay (theme-reactive) ── */
-  .grid-overlay {
-    background-image:
-      linear-gradient(color-mix(in srgb, var(--color-brand) 3%, transparent) 1px, transparent 1px),
-      linear-gradient(90deg, color-mix(in srgb, var(--color-brand) 3%, transparent) 1px, transparent 1px);
-    background-size: 60px 60px;
-    transition: background-image 0.35s ease;
+  /* ── Subtle noise texture (premium grain) ── */
+  .hero-noise {
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    opacity: 0.025;
+    mix-blend-mode: overlay;
   }
 
-  /* ── Gradient mesh (theme-reactive) ── */
-  .mesh-orb {
-    position: absolute;
+  /* ── Central glow (single focused orb, breathes) ── */
+  .hero-glow {
+    width: 600px;
+    height: 600px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     border-radius: 50%;
-    filter: blur(100px);
+    background: radial-gradient(circle, color-mix(in srgb, var(--color-brand) 10%, transparent) 0%, transparent 70%);
+    filter: blur(80px);
+    animation: glowBreathe 6s ease-in-out infinite;
     transition: background 0.5s ease;
   }
 
-  .mesh-orb-1 {
-    width: 600px;
-    height: 600px;
-    background: radial-gradient(circle, color-mix(in srgb, var(--color-brand) 8%, transparent) 0%, transparent 70%);
-    top: -10%;
-    left: -10%;
-    animation: meshDrift-1 30s ease-in-out infinite;
-  }
-
-  .mesh-orb-2 {
-    width: 500px;
-    height: 500px;
-    background: radial-gradient(circle, color-mix(in srgb, var(--color-brand-light) 6%, transparent) 0%, transparent 70%);
-    bottom: -15%;
-    right: -5%;
-    animation: meshDrift-2 25s ease-in-out infinite;
-    animation-delay: -10s;
-  }
-
-  .mesh-orb-3 {
-    width: 400px;
-    height: 400px;
-    background: radial-gradient(circle, color-mix(in srgb, var(--color-brand-mint) 4%, transparent) 0%, transparent 70%);
-    top: 40%;
-    left: 50%;
-    animation: meshDrift-3 35s ease-in-out infinite;
-    animation-delay: -15s;
-  }
-
-  @keyframes meshDrift-1 {
-    0%, 100% { transform: translate(0, 0); }
-    50% { transform: translate(60px, 40px); }
-  }
-
-  @keyframes meshDrift-2 {
-    0%, 100% { transform: translate(0, 0); }
-    50% { transform: translate(-50px, -30px); }
-  }
-
-  @keyframes meshDrift-3 {
-    0%, 100% { transform: translate(0, 0); }
-    33% { transform: translate(-40px, 30px); }
-    66% { transform: translate(30px, -20px); }
-  }
-
-  /* ── Geometric shapes (already theme-reactive via CSS vars) ── */
-  .shape {
-    position: absolute;
-    border-radius: 50%;
-    opacity: 0.15;
-    filter: blur(1px);
-    transition: background 0.35s ease;
-  }
-
-  .shape-1 {
-    width: 300px;
-    height: 300px;
-    background: var(--color-brand);
-    top: 10%;
-    left: -5%;
-    animation: float-1 20s ease-in-out infinite;
-  }
-
-  .shape-2 {
-    width: 200px;
-    height: 200px;
-    background: var(--color-brand-light);
-    top: 60%;
-    right: -3%;
-    animation: float-2 25s ease-in-out infinite;
-    animation-delay: -5s;
-  }
-
-  .shape-3 {
-    width: 150px;
-    height: 150px;
-    background: var(--color-brand-mint);
-    bottom: 15%;
-    left: 15%;
-    border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
-    animation: float-3 18s ease-in-out infinite;
-    animation-delay: -3s;
-  }
-
-  .shape-4 {
-    width: 80px;
-    height: 80px;
-    background: var(--color-brand);
-    top: 25%;
-    right: 20%;
-    border-radius: 0;
-    transform: rotate(45deg);
-    animation: float-4 22s ease-in-out infinite;
-    animation-delay: -8s;
-  }
-
-  .shape-5 {
-    width: 120px;
-    height: 120px;
-    background: var(--color-brand-light);
-    top: 70%;
-    left: 60%;
-    clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
-    border-radius: 0;
-    animation: float-5 24s ease-in-out infinite;
-    animation-delay: -12s;
-  }
-
-  @keyframes float-1 {
-    0%, 100% { transform: translate(0, 0) scale(1); }
-    25% { transform: translate(40px, -30px) scale(1.05); }
-    50% { transform: translate(20px, 40px) scale(0.95); }
-    75% { transform: translate(-30px, 20px) scale(1.02); }
-  }
-
-  @keyframes float-2 {
-    0%, 100% { transform: translate(0, 0) scale(1); }
-    25% { transform: translate(-30px, 40px) scale(1.08); }
-    50% { transform: translate(-50px, -20px) scale(0.92); }
-    75% { transform: translate(20px, -40px) scale(1.04); }
-  }
-
-  @keyframes float-3 {
-    0%, 100% { transform: translate(0, 0) rotate(0deg); }
-    33% { transform: translate(30px, -40px) rotate(120deg); }
-    66% { transform: translate(-20px, 30px) rotate(240deg); }
-  }
-
-  @keyframes float-4 {
-    0%, 100% { transform: rotate(45deg) translate(0, 0); }
-    25% { transform: rotate(55deg) translate(20px, -30px); }
-    50% { transform: rotate(40deg) translate(-10px, 20px); }
-    75% { transform: rotate(50deg) translate(15px, 10px); }
-  }
-
-  @keyframes float-5 {
-    0%, 100% { transform: translate(0, 0) rotate(0deg); }
-    33% { transform: translate(-25px, -35px) rotate(15deg); }
-    66% { transform: translate(30px, 20px) rotate(-10deg); }
+  @keyframes glowBreathe {
+    0%, 100% { opacity: 0.5; transform: translate(-50%, -50%) scale(1); }
+    50% { opacity: 0.8; transform: translate(-50%, -50%) scale(1.15); }
   }
 
   /* ── Logo container with glow ring ── */
@@ -291,7 +136,7 @@
     50% { opacity: 0.7; transform: scale(1.05); }
   }
 
-  /* ── Hero logo (inline SVG with morph) ── */
+  /* ── Hero logo SVG ── */
   .hero-logo-svg {
     position: relative;
     z-index: 1;
@@ -315,7 +160,6 @@
     animation: heroInfBreathe 2.5s ease-in-out infinite;
   }
 
-  /* Hero infinity: bigger glow + color shimmer cycling brand → brand-light → brand-mint */
   @keyframes heroInfBreathe {
     0%, 100% {
       filter: drop-shadow(0 0 8px var(--color-brand))
@@ -362,41 +206,15 @@
     transform: scale(1.1);
   }
 
-  /* ── Floating code snippet ── */
-  .code-float {
-    top: 18%;
-    right: 5%;
-    transform: rotate(3deg);
-    opacity: 0.4;
-    animation: codeFloat 20s ease-in-out infinite;
-  }
-
-  @keyframes codeFloat {
-    0%, 100% { transform: rotate(3deg) translate(0, 0); }
-    50% { transform: rotate(2deg) translate(-10px, 15px); }
-  }
-
   /* ── Cursor blink ── */
-  .cursor {
-    animation: blink 1s step-end infinite;
-  }
-
-  @keyframes blink {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0; }
-  }
+  .cursor { animation: blink 1s step-end infinite; }
+  @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
 
   /* ── Scroll indicator ── */
-  .scroll-dot {
-    animation: scrollBounce 2s cubic-bezier(0.16, 1, 0.3, 1) infinite;
-  }
+  .scroll-dot { animation: scrollBounce 2s cubic-bezier(0.16, 1, 0.3, 1) infinite; }
+  @keyframes scrollBounce { 0%, 100% { transform: translateY(0); opacity: 1; } 50% { transform: translateY(16px); opacity: 0.2; } }
 
-  @keyframes scrollBounce {
-    0%, 100% { transform: translateY(0); opacity: 1; }
-    50% { transform: translateY(16px); opacity: 0.2; }
-  }
-
-  /* ── CTA buttons (theme-reactive) ── */
+  /* ── CTA buttons ── */
   .cta-outline {
     color: var(--color-brand);
     border: 1px solid var(--color-brand);
@@ -428,30 +246,13 @@
 
   /* ── Responsive ── */
   @media (max-width: 768px) {
-    .shape-1 { width: 180px; height: 180px; }
-    .shape-2 { width: 120px; height: 120px; }
-    .shape-3 { width: 90px; height: 90px; }
-    .shape-4 { width: 50px; height: 50px; }
-    .shape-5 { width: 70px; height: 70px; }
-    .mesh-orb-1 { width: 300px; height: 300px; }
-    .mesh-orb-2 { width: 250px; height: 250px; }
-    .mesh-orb-3 { width: 200px; height: 200px; }
+    .hero-glow { width: 300px; height: 300px; }
     .logo-container { padding: 1rem 2rem; }
-    .logo-container:hover .hero-logo-glitch { opacity: 0.4; }
   }
 
-  /* ── Reduced motion ── */
   @media (prefers-reduced-motion: reduce) {
-    .shape, .cursor, .scroll-dot,
-    .mesh-orb, .code-float,
-    .hero-logo-img, .logo-glow-ring {
-      animation: none;
-    }
-    .hero-logo-glitch { display: none; }
+    .cursor, .scroll-dot, .logo-glow-ring, .hero-glow { animation: none; }
     .scroll-dot { opacity: 1; }
-    .hero-logo-img {
-      filter: brightness(0) invert(1);
-    }
   }
 </style>
 
