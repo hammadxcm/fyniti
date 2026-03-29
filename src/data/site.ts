@@ -8,7 +8,7 @@ export const siteConfig = {
   phone: '+44 755 1045042',
   location: 'United Kingdom',
   formspreeId: '', // Legacy — unused
-  web3formsKey: '',  // Set via PUBLIC_WEB3FORMS_KEY env var
+  web3formsKey: '', // Set via PUBLIC_WEB3FORMS_KEY env var
   contactEmail: 'contact@fyniti.co.uk',
 } as const;
 

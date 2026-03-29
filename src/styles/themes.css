@@ -320,12 +320,14 @@ nav,
 /* ── Arctic: Glass & Cards ── */
 [data-theme="arctic"] .glass-bg,
 [data-theme="arctic"] .glow-border {
-  box-shadow: 0 0 0 1px rgba(3, 105, 161, 0.1),
+  box-shadow:
+    0 0 0 1px rgba(3, 105, 161, 0.1),
     0 0 20px -5px rgba(3, 105, 161, 0.08);
 }
 
 [data-theme="arctic"] .glow-border:hover {
-  box-shadow: 0 0 0 1px rgba(3, 105, 161, 0.2),
+  box-shadow:
+    0 0 0 1px rgba(3, 105, 161, 0.2),
     0 0 30px -5px rgba(3, 105, 161, 0.15);
 }
 

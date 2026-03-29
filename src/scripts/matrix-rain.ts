@@ -10,9 +10,9 @@ const FONT_SIZE = 14;
 
 // Theme → { color, bg, speed (lower = faster) }
 const THEME_CONFIG: Record<string, { color: string; bg: string; speed: number }> = {
-  '':       { color: 'rgba(0, 191, 191, 0.6)', bg: 'rgba(10, 14, 20, 0.06)', speed: 3 },
-  hacker:   { color: 'rgba(0, 191, 191, 0.6)', bg: 'rgba(10, 14, 20, 0.06)', speed: 3 },
-  matrix:   { color: 'rgba(0, 255, 65, 0.8)',  bg: 'rgba(0, 0, 0, 0.05)',    speed: 2 },
+  '': { color: 'rgba(0, 191, 191, 0.6)', bg: 'rgba(10, 14, 20, 0.06)', speed: 3 },
+  hacker: { color: 'rgba(0, 191, 191, 0.6)', bg: 'rgba(10, 14, 20, 0.06)', speed: 3 },
+  matrix: { color: 'rgba(0, 255, 65, 0.8)', bg: 'rgba(0, 0, 0, 0.05)', speed: 2 },
 };
 
 function getTheme(): string {
