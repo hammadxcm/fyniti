@@ -217,12 +217,14 @@ import SectionHeader from '@components/SectionHeader.astro';
     grid-template-columns: 1fr;
     gap: 2rem;
     align-items: start;
+    text-align: center;
   }
 
   @media (min-width: 768px) {
     .contact-grid {
       grid-template-columns: 1fr 1.25fr;
       gap: 2.5rem;
+      text-align: left;
     }
   }
 
@@ -254,10 +256,19 @@ import SectionHeader from '@components/SectionHeader.astro';
 
   .contact-item {
     display: flex;
-    align-items: flex-start;
-    gap: 1rem;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
     padding: 0.625rem 0;
     border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+  }
+
+  @media (min-width: 768px) {
+    .contact-item {
+      justify-content: flex-start;
+      align-items: flex-start;
+      gap: 1rem;
+    }
   }
 
   .contact-item:last-child {
