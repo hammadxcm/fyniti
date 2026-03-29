@@ -51,25 +51,23 @@ const stepIcons = [Search, ClipboardList, Code, CheckCircle, Rocket];
   /* ── Step ── */
   .ps {
     display: flex;
-    flex-direction: row;
-    align-items: flex-start;
-    gap: 1rem;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 0.5rem;
   }
 
   @media (min-width: 768px) {
     .ps {
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
       gap: 0;
     }
   }
 
   /* ── Node (number circle) ── */
   .ps-node {
-    width: 40px;
-    height: 40px;
-    min-width: 40px;
+    width: 36px;
+    height: 36px;
+    min-width: 36px;
     border-radius: 50%;
     background: linear-gradient(135deg, var(--color-brand), var(--color-brand-light));
     display: flex;

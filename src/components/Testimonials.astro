@@ -79,9 +79,9 @@ import SectionHeader from '@components/SectionHeader.astro';
 
   .testimonial-card {
     flex-shrink: 0;
-    width: 350px;
+    width: clamp(280px, 85vw, 350px);
     max-width: 350px;
-    padding: 1.75rem;
+    padding: clamp(1.25rem, 4vw, 1.75rem);
     display: flex;
     flex-direction: column;
     border: 1px solid var(--color-border-default);
