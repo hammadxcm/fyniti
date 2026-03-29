@@ -1,0 +1,577 @@
+/* ══════════════════════════════════════════
+   FYNITI — 15 Theme System
+   Default (Hacker) is in global.css @theme
+   ══════════════════════════════════════════ */
+
+/* ── DRACULA ── */
+[data-theme="dracula"] {
+  --color-brand: #bd93f9;
+  --color-brand-light: #ff79c6;
+  --color-brand-mint: #50fa7b;
+  --color-bg-base: #282a36;
+  --color-bg-surface: #343746;
+  --color-bg-elevated: #44475a;
+  --color-text-primary: #f8f8f2;
+  --color-text-secondary: #6272a4;
+  --color-text-accent: #50fa7b;
+  --color-border-default: rgba(189, 147, 249, 0.15);
+  --color-border-hover: rgba(189, 147, 249, 0.3);
+  --glass-bg: rgba(40, 42, 54, 0.6);
+}
+
+/* ── NORD ── */
+[data-theme="nord"] {
+  --color-brand: #88c0d0;
+  --color-brand-light: #81a1c1;
+  --color-brand-mint: #a3be8c;
+  --color-bg-base: #2e3440;
+  --color-bg-surface: #3b4252;
+  --color-bg-elevated: #434c5e;
+  --color-text-primary: #eceff4;
+  --color-text-secondary: #7b88a1;
+  --color-text-accent: #a3be8c;
+  --color-border-default: rgba(136, 192, 208, 0.15);
+  --color-border-hover: rgba(136, 192, 208, 0.3);
+  --glass-bg: rgba(46, 52, 64, 0.6);
+}
+
+/* ── CATPPUCCIN ── */
+[data-theme="catppuccin"] {
+  --color-brand: #cba6f7;
+  --color-brand-light: #89b4fa;
+  --color-brand-mint: #a6e3a1;
+  --color-bg-base: #1e1e2e;
+  --color-bg-surface: #2a2a3c;
+  --color-bg-elevated: #313244;
+  --color-text-primary: #cdd6f4;
+  --color-text-secondary: #888da5;
+  --color-text-accent: #a6e3a1;
+  --color-border-default: rgba(203, 166, 247, 0.15);
+  --color-border-hover: rgba(203, 166, 247, 0.3);
+  --glass-bg: rgba(30, 30, 46, 0.6);
+}
+
+/* ── SYNTHWAVE ── */
+[data-theme="synthwave"] {
+  --color-brand: #ff2e97;
+  --color-brand-light: #f9c80e;
+  --color-brand-mint: #00f0ff;
+  --color-bg-base: #1a1028;
+  --color-bg-surface: #231538;
+  --color-bg-elevated: #2a1a40;
+  --color-text-primary: #f0e6ff;
+  --color-text-secondary: #9b7ec8;
+  --color-text-accent: #00f0ff;
+  --color-border-default: rgba(255, 46, 151, 0.15);
+  --color-border-hover: rgba(255, 46, 151, 0.3);
+  --glass-bg: rgba(26, 16, 40, 0.6);
+}
+
+/* ── MATRIX ── */
+[data-theme="matrix"] {
+  --color-brand: #00ff41;
+  --color-brand-light: #39ff14;
+  --color-brand-mint: #7cfc00;
+  --color-bg-base: #0a0a0a;
+  --color-bg-surface: #0d140d;
+  --color-bg-elevated: #0a140a;
+  --color-text-primary: #00ff41;
+  --color-text-secondary: #00c818;
+  --color-text-accent: #7cfc00;
+  --color-border-default: rgba(0, 255, 65, 0.15);
+  --color-border-hover: rgba(0, 255, 65, 0.3);
+  --glass-bg: rgba(10, 10, 10, 0.6);
+}
+
+/* ── BLOOD MOON ── */
+[data-theme="bloodmoon"] {
+  --color-brand: #ff0040;
+  --color-brand-light: #ff4d6d;
+  --color-brand-mint: #ff8fa3;
+  --color-bg-base: #0d0208;
+  --color-bg-surface: #150610;
+  --color-bg-elevated: #1a0410;
+  --color-text-primary: #f0e6e8;
+  --color-text-secondary: #c06b84;
+  --color-text-accent: #ff8fa3;
+  --color-border-default: rgba(255, 0, 64, 0.15);
+  --color-border-hover: rgba(255, 0, 64, 0.3);
+  --glass-bg: rgba(13, 2, 8, 0.6);
+}
+
+/* ── MIDNIGHT ── */
+[data-theme="midnight"] {
+  --color-brand: #7b73ff;
+  --color-brand-light: #a78bfa;
+  --color-brand-mint: #c4b5fd;
+  --color-bg-base: #0f0f1a;
+  --color-bg-surface: #161624;
+  --color-bg-elevated: #18182a;
+  --color-text-primary: #e8e6f0;
+  --color-text-secondary: #9290a8;
+  --color-text-accent: #c4b5fd;
+  --color-border-default: rgba(123, 115, 255, 0.15);
+  --color-border-hover: rgba(123, 115, 255, 0.3);
+  --glass-bg: rgba(15, 15, 26, 0.6);
+}
+
+/* ── ARCTIC (Light Theme) ── */
+[data-theme="arctic"] {
+  --color-brand: #0369a1;
+  --color-brand-light: #0ea5e9;
+  --color-brand-mint: #38bdf8;
+  --color-bg-base: #f0f9ff;
+  --color-bg-surface: #e0f2fe;
+  --color-bg-elevated: #bae6fd;
+  --color-text-primary: #0f172a;
+  --color-text-secondary: #475569;
+  --color-text-accent: #0369a1;
+  --color-border-default: rgba(3, 105, 161, 0.15);
+  --color-border-hover: rgba(3, 105, 161, 0.3);
+  --glass-bg: rgba(214, 232, 248, 0.55);
+}
+
+/* ── GRUVBOX ── */
+[data-theme="gruvbox"] {
+  --color-brand: #fabd2f;
+  --color-brand-light: #83a598;
+  --color-brand-mint: #b8bb26;
+  --color-bg-base: #282828;
+  --color-bg-surface: #32302f;
+  --color-bg-elevated: #3c3836;
+  --color-text-primary: #ebdbb2;
+  --color-text-secondary: #a89984;
+  --color-text-accent: #b8bb26;
+  --color-border-default: rgba(250, 189, 47, 0.15);
+  --color-border-hover: rgba(250, 189, 47, 0.3);
+  --glass-bg: rgba(40, 40, 40, 0.6);
+}
+
+/* ── CYBERPUNK ── */
+[data-theme="cyberpunk"] {
+  --color-brand: #ffd700;
+  --color-brand-light: #00ffff;
+  --color-brand-mint: #ff2e97;
+  --color-bg-base: #0a0a12;
+  --color-bg-surface: #101018;
+  --color-bg-elevated: #12121e;
+  --color-text-primary: #e8e6f0;
+  --color-text-secondary: #8888aa;
+  --color-text-accent: #ffd700;
+  --color-border-default: rgba(255, 215, 0, 0.15);
+  --color-border-hover: rgba(255, 215, 0, 0.3);
+  --glass-bg: rgba(10, 10, 18, 0.6);
+}
+
+/* ── NEBULA ── */
+[data-theme="nebula"] {
+  --color-brand: #e040fb;
+  --color-brand-light: #7c4dff;
+  --color-brand-mint: #b388ff;
+  --color-bg-base: #0b0014;
+  --color-bg-surface: #110820;
+  --color-bg-elevated: #160828;
+  --color-text-primary: #f0e6ff;
+  --color-text-secondary: #9b7ec8;
+  --color-text-accent: #b388ff;
+  --color-border-default: rgba(224, 64, 251, 0.15);
+  --color-border-hover: rgba(224, 64, 251, 0.3);
+  --glass-bg: rgba(11, 0, 20, 0.6);
+}
+
+/* ── SOLARIZED ── */
+[data-theme="solarized"] {
+  --color-brand: #268bd2;
+  --color-brand-light: #2aa198;
+  --color-brand-mint: #859900;
+  --color-bg-base: #002b36;
+  --color-bg-surface: #04323e;
+  --color-bg-elevated: #073642;
+  --color-text-primary: #fdf6e3;
+  --color-text-secondary: #839496;
+  --color-text-accent: #859900;
+  --color-border-default: rgba(38, 139, 210, 0.15);
+  --color-border-hover: rgba(38, 139, 210, 0.3);
+  --glass-bg: rgba(0, 43, 54, 0.6);
+}
+
+/* ── ROSÉ PINE ── */
+[data-theme="rosepine"] {
+  --color-brand: #ea9a97;
+  --color-brand-light: #c4a7e7;
+  --color-brand-mint: #9ccfd8;
+  --color-bg-base: #191724;
+  --color-bg-surface: #1f1d2e;
+  --color-bg-elevated: #262335;
+  --color-text-primary: #e0def4;
+  --color-text-secondary: #908caa;
+  --color-text-accent: #9ccfd8;
+  --color-border-default: rgba(234, 154, 151, 0.15);
+  --color-border-hover: rgba(234, 154, 151, 0.3);
+  --glass-bg: rgba(25, 23, 36, 0.6);
+}
+
+/* ── MONOKAI ── */
+[data-theme="monokai"] {
+  --color-brand: #a6e22e;
+  --color-brand-light: #66d9ef;
+  --color-brand-mint: #f92672;
+  --color-bg-base: #272822;
+  --color-bg-surface: #302f28;
+  --color-bg-elevated: #37362c;
+  --color-text-primary: #f8f8f2;
+  --color-text-secondary: #90908a;
+  --color-text-accent: #f92672;
+  --color-border-default: rgba(166, 226, 46, 0.15);
+  --color-border-hover: rgba(166, 226, 46, 0.3);
+  --glass-bg: rgba(39, 40, 34, 0.6);
+}
+
+/* ══════════════════════════════════════════
+   Theme Transitions
+   ══════════════════════════════════════════ */
+
+body,
+nav,
+.glass,
+.glow-border,
+.section-surface {
+  transition:
+    background-color 0.35s ease,
+    color 0.35s ease,
+    border-color 0.35s ease,
+    box-shadow 0.35s ease;
+}
+
+/* ══════════════════════════════════════════
+   Arctic (Light Theme) Overrides
+   ══════════════════════════════════════════ */
+
+[data-theme="arctic"] .glass {
+  background: rgba(224, 242, 254, 0.75);
+  border-color: rgba(3, 105, 161, 0.15);
+}
+
+[data-theme="arctic"] .gradient-text {
+  background: linear-gradient(135deg, #0369a1 0%, #0ea5e9 50%, #0c4a6e 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+[data-theme="arctic"] .section-surface {
+  background-color: #e0f2fe;
+}
+
+[data-theme="arctic"] .section-surface::before {
+  background: linear-gradient(to bottom, #f0f9ff, transparent);
+}
+
+[data-theme="arctic"] .section-surface::after {
+  background: linear-gradient(to top, #f0f9ff, transparent);
+}
+
+[data-theme="arctic"] body::before {
+  opacity: 0.008;
+}
+
+/* ── Arctic: Nav ── */
+[data-theme="arctic"] #main-nav {
+  background: rgba(240, 249, 255, 0.75) !important;
+  backdrop-filter: blur(12px) !important;
+}
+
+[data-theme="arctic"] #main-nav.scrolled {
+  background: rgba(240, 249, 255, 0.9) !important;
+  border-bottom-color: rgba(3, 105, 161, 0.12);
+}
+
+[data-theme="arctic"] .nav-link {
+  color: #334155;
+}
+
+[data-theme="arctic"] .nav-link:hover,
+[data-theme="arctic"] .nav-link.active {
+  color: #0369a1;
+}
+
+[data-theme="arctic"] .theme-toggle-btn {
+  color: #475569;
+  border-color: rgba(3, 105, 161, 0.2);
+}
+
+[data-theme="arctic"] .theme-toggle-btn:hover {
+  color: #0369a1;
+  border-color: #0369a1;
+}
+
+/* ── Arctic: Logo SVG paths (dark fill on light bg) ── */
+[data-theme="arctic"] .morph-path {
+  fill: #0c4a6e;
+  stroke: #0c4a6e;
+}
+
+[data-theme="arctic"] .morph-path.is-hollow {
+  fill: none;
+  stroke: #0369a1;
+  filter: drop-shadow(0 0 4px rgba(3, 105, 161, 0.3));
+}
+
+/* ── Arctic: Glass & Cards ── */
+[data-theme="arctic"] .glass-bg,
+[data-theme="arctic"] .glow-border {
+  box-shadow: 0 0 0 1px rgba(3, 105, 161, 0.1),
+    0 0 20px -5px rgba(3, 105, 161, 0.08);
+}
+
+[data-theme="arctic"] .glow-border:hover {
+  box-shadow: 0 0 0 1px rgba(3, 105, 161, 0.2),
+    0 0 30px -5px rgba(3, 105, 161, 0.15);
+}
+
+/* ── Arctic: Hamburger & mobile menu ── */
+[data-theme="arctic"] .hamburger-line {
+  background-color: #334155;
+}
+
+[data-theme="arctic"] .mobile-menu {
+  background: rgba(240, 249, 255, 0.95);
+}
+
+/* ── Arctic: Hero text ── */
+[data-theme="arctic"] .hero-greeting,
+[data-theme="arctic"] .hero-typewriter .font-mono {
+  color: #0369a1;
+}
+
+[data-theme="arctic"] .hero-subtitle {
+  color: #475569;
+}
+
+/* ── Arctic: CTA buttons ── */
+[data-theme="arctic"] .cta-outline {
+  color: #0369a1;
+  border-color: #0369a1;
+}
+
+[data-theme="arctic"] .cta-outline:hover {
+  background: #0369a1;
+  color: #ffffff;
+}
+
+[data-theme="arctic"] .cta-filled {
+  background: #0369a1;
+  color: #ffffff;
+}
+
+/* ── Arctic: Team card initials ── */
+[data-theme="arctic"] .tc-initials,
+[data-theme="arctic"] .avatar-initials {
+  color: #ffffff;
+}
+
+/* ── Arctic: Scroll indicator ── */
+[data-theme="arctic"] .scroll-indicator {
+  border-color: rgba(3, 105, 161, 0.3);
+}
+
+[data-theme="arctic"] .scroll-dot {
+  background: #0369a1;
+}
+
+/* ── Arctic: Footer ── */
+[data-theme="arctic"] footer {
+  background: #e0f2fe;
+  color: #334155;
+}
+
+[data-theme="arctic"] .footer-logo-img {
+  filter: brightness(0);
+}
+
+/* ── Arctic: Selection ── */
+[data-theme="arctic"] ::selection {
+  background-color: rgba(3, 105, 161, 0.25);
+  color: #0c4a6e;
+}
+
+/* ── Arctic: Code snippet (hero) ── */
+[data-theme="arctic"] .code-float pre {
+  background: rgba(224, 242, 254, 0.8);
+  border-color: rgba(3, 105, 161, 0.12);
+}
+
+/* ── Arctic: Section header ── */
+[data-theme="arctic"] .section-label {
+  color: #0369a1;
+}
+
+[data-theme="arctic"] .section-title {
+  color: #0f172a;
+}
+
+/* ── Arctic: Stat values ── */
+[data-theme="arctic"] .stat-value {
+  background: linear-gradient(135deg, #0369a1, #0ea5e9);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* ══════════════════════════════════════════
+   Theme-Specific Effects
+   ══════════════════════════════════════════ */
+
+/* Matrix — green terminal glow */
+[data-theme="matrix"] .section-title,
+[data-theme="matrix"] .gradient-text,
+[data-theme="matrix"] .hero-logo-img {
+  filter: brightness(0) invert(1) drop-shadow(0 0 12px rgba(0, 255, 65, 0.4));
+}
+
+[data-theme="matrix"] .nav-logo-img {
+  filter: brightness(0) invert(1) drop-shadow(0 0 6px rgba(0, 255, 65, 0.4));
+}
+
+/* Cyberpunk — neon glow */
+[data-theme="cyberpunk"] .section-title {
+  text-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+}
+
+[data-theme="cyberpunk"] .hero-logo-img {
+  filter: brightness(0) invert(1) drop-shadow(0 0 15px rgba(255, 215, 0, 0.4));
+}
+
+/* Blood Moon — red glow */
+[data-theme="bloodmoon"] .section-title {
+  text-shadow: 0 0 10px rgba(255, 0, 64, 0.25);
+}
+
+[data-theme="bloodmoon"] .hero-logo-img {
+  filter: brightness(0) invert(1) drop-shadow(0 0 15px rgba(255, 0, 64, 0.4));
+}
+
+/* Synthwave — neon pink glow */
+[data-theme="synthwave"] .section-title {
+  text-shadow: 0 0 10px rgba(255, 46, 151, 0.25);
+}
+
+[data-theme="synthwave"] .hero-logo-img {
+  filter: brightness(0) invert(1) drop-shadow(0 0 15px rgba(255, 46, 151, 0.4));
+}
+
+/* Nebula — magenta glow */
+[data-theme="nebula"] .hero-logo-img {
+  filter: brightness(0) invert(1) drop-shadow(0 0 15px rgba(224, 64, 251, 0.4));
+}
+
+/* ══════════════════════════════════════════
+   Theme-Specific Logo Hover Effects
+   ══════════════════════════════════════════ */
+
+/* Matrix — intensified green glitch */
+[data-theme="matrix"] .logo-container:hover .hero-logo-glitch--r {
+  filter: brightness(0) invert(1) hue-rotate(90deg) saturate(3);
+  animation-duration: 0.15s;
+}
+[data-theme="matrix"] .logo-container:hover .hero-logo-glitch--c {
+  filter: brightness(0) invert(1) hue-rotate(120deg) saturate(3);
+  animation-duration: 0.2s;
+}
+[data-theme="matrix"] .logo-container:hover .hero-logo-img {
+  filter: brightness(0) invert(1) drop-shadow(0 0 25px rgba(0, 255, 65, 0.8));
+}
+
+/* Synthwave — neon lightning flash */
+[data-theme="synthwave"] .logo-container:hover .hero-logo-glitch {
+  opacity: 0;
+  animation: none;
+}
+[data-theme="synthwave"] .logo-container:hover .hero-logo-img {
+  animation:
+    synthFlash 0.6s ease-out 1,
+    logoFloat 6s ease-in-out infinite;
+  filter: brightness(0) invert(1) drop-shadow(0 0 25px rgba(255, 46, 151, 0.8))
+    drop-shadow(0 0 50px rgba(0, 240, 255, 0.4));
+}
+@keyframes synthFlash {
+  0% {
+    filter: brightness(3) invert(1) drop-shadow(0 0 60px #ff2e97);
+  }
+  15% {
+    filter: brightness(0) invert(1) drop-shadow(0 0 15px #ff2e97);
+  }
+  30% {
+    filter: brightness(2.5) invert(1) drop-shadow(0 0 40px #00f0ff);
+  }
+  100% {
+    filter: brightness(0) invert(1) drop-shadow(0 0 25px rgba(255, 46, 151, 0.8))
+      drop-shadow(0 0 50px rgba(0, 240, 255, 0.4));
+  }
+}
+
+/* Blood Moon — red pulse glow */
+[data-theme="bloodmoon"] .logo-container:hover .hero-logo-glitch {
+  opacity: 0;
+  animation: none;
+}
+[data-theme="bloodmoon"] .logo-container:hover .hero-logo-img {
+  animation:
+    bloodPulse 1.2s ease-in-out infinite,
+    logoFloat 6s ease-in-out infinite;
+}
+[data-theme="bloodmoon"] .logo-container:hover .logo-glow-ring {
+  background: radial-gradient(circle, rgba(255, 0, 64, 0.4), transparent 70%);
+}
+@keyframes bloodPulse {
+  0%,
+  100% {
+    filter: brightness(0) invert(1) drop-shadow(0 0 15px rgba(255, 0, 64, 0.5));
+  }
+  50% {
+    filter: brightness(0) invert(1) drop-shadow(0 0 40px rgba(255, 0, 64, 0.9))
+      drop-shadow(0 0 80px rgba(255, 77, 109, 0.4));
+  }
+}
+
+/* Cyberpunk — gold neon flicker */
+[data-theme="cyberpunk"] .logo-container:hover .hero-logo-glitch {
+  opacity: 0;
+  animation: none;
+}
+[data-theme="cyberpunk"] .logo-container:hover .hero-logo-img {
+  animation:
+    cyberFlicker 0.15s steps(1) infinite,
+    logoFloat 6s ease-in-out infinite;
+}
+@keyframes cyberFlicker {
+  0% {
+    filter: brightness(0) invert(1) drop-shadow(0 0 20px rgba(255, 215, 0, 0.8));
+  }
+  20% {
+    filter: brightness(0) invert(1) drop-shadow(0 0 5px rgba(255, 215, 0, 0.2));
+  }
+  40% {
+    filter: brightness(0) invert(1) drop-shadow(0 0 30px rgba(0, 255, 255, 0.6));
+  }
+  60% {
+    filter: brightness(0) invert(1) drop-shadow(0 0 25px rgba(255, 215, 0, 0.7));
+  }
+  80% {
+    filter: brightness(0) invert(1) drop-shadow(0 0 8px rgba(255, 215, 0, 0.3));
+  }
+  100% {
+    filter: brightness(0) invert(1) drop-shadow(0 0 35px rgba(255, 215, 0, 1));
+  }
+}
+
+/* Arctic — dark logo glitch */
+[data-theme="arctic"] .hero-logo-glitch {
+  filter: brightness(0);
+}
+[data-theme="arctic"] .hero-logo-glitch--r {
+  filter: brightness(0) hue-rotate(-60deg) saturate(2);
+}
+[data-theme="arctic"] .hero-logo-glitch--c {
+  filter: brightness(0) hue-rotate(180deg) saturate(2);
+}

@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+  <linearGradient id="a" x1="70.252" x2="170.659" y1="1237.399" y2="1151.272" gradientTransform="matrix(.563 0 0 -.568 -29.215 707.817)" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#5A9FD4"/><stop offset="1" stop-color="#306998"/></linearGradient>
+  <path fill="url(#a)" d="M63.4 1c-13.5 0-12.6 5.8-12.6 5.8l.1 6.1H64v1.8H34.5S22 13.3 22 27s10.9 13.2 10.9 13.2h6.5v-6.3s-.3-6.5 6.4-6.5h11S63 27.7 63 21.7V7.4S64.1 1 63.4 1zM50.9 5.2a2.1 2.1 0 110 4.2 2.1 2.1 0 010-4.2z"/>
+  <linearGradient id="b" x1="209.474" x2="173.62" y1="1098.811" y2="1149.545" gradientTransform="matrix(.563 0 0 -.568 -29.215 707.817)" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#FFD43B"/><stop offset="1" stop-color="#FFE873"/></linearGradient>
+  <path fill="url(#b)" d="M64.6 55.4c13.5 0 12.6-5.8 12.6-5.8l-.1-6.1H64v-1.8h29.5S106 43.1 106 29.4s-10.9-13.2-10.9-13.2h-6.5v6.3s.3 6.5-6.4 6.5h-11S65 28.7 65 34.7v14.3s-1.1 6.4-.4 6.4zm12.5-4.2a2.1 2.1 0 110-4.2 2.1 2.1 0 010 4.2z"/>
+</svg>

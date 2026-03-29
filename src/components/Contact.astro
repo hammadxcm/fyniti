@@ -1,0 +1,448 @@
+---
+import { siteConfig, services } from '@data/site';
+import SectionHeader from '@components/SectionHeader.astro';
+---
+
+<section id="contact" class="section-surface" style="position: relative; overflow: hidden;">
+  <!-- Ambient orb -->
+  <div class="ambient-orb" style="top: 20%; right: -5%; width: 400px; height: 400px; --orb-color: var(--color-brand); opacity: 0.07;"></div>
+  <div class="section">
+    <SectionHeader label="Get In Touch" title="Let's Work Together" />
+
+    <div class="contact-grid reveal">
+      <!-- Left column: Contact info -->
+      <div class="contact-info glass glass-shimmer glow-border rounded-xl p-8">
+        <div class="contact-info-header">
+          <div class="contact-info-accent" aria-hidden="true"></div>
+          <h3 class="text-lg font-semibold text-text-primary mb-0">Contact Information</h3>
+          <p class="text-text-secondary text-sm mt-1 mb-0">We'd love to hear from you</p>
+        </div>
+
+        <ul class="contact-list" role="list">
+          <!-- Email -->
+          <li class="contact-item">
+            <span class="contact-icon" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="4" width="16" height="12" rx="2" />
+                <path d="M2 4l8 6 8-6" />
+              </svg>
+            </span>
+            <div>
+              <span class="contact-label">Email</span>
+              <a href={`mailto:${siteConfig.email}`} class="contact-value contact-link">
+                {siteConfig.email}
+              </a>
+            </div>
+          </li>
+
+          <!-- Phone -->
+          <li class="contact-item">
+            <span class="contact-icon" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M3 2h4l2 5-3 2a11 11 0 005 5l2-3 5 2v4a2 2 0 01-2 2A16 16 0 012 4a2 2 0 012-2z" />
+              </svg>
+            </span>
+            <div>
+              <span class="contact-label">Phone</span>
+              <a href={`tel:${siteConfig.phone.replace(/\s/g, '')}`} class="contact-value contact-link">
+                {siteConfig.phone}
+              </a>
+            </div>
+          </li>
+
+          <!-- Location -->
+          <li class="contact-item">
+            <span class="contact-icon" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M10 18s-6-5.34-6-9a6 6 0 1112 0c0 3.66-6 9-6 9z" />
+                <circle cx="10" cy="9" r="2" />
+              </svg>
+            </span>
+            <div>
+              <span class="contact-label">Location</span>
+              <span class="contact-value">{siteConfig.location}</span>
+            </div>
+          </li>
+
+          <!-- Hours -->
+          <li class="contact-item">
+            <span class="contact-icon" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="10" cy="10" r="8" />
+                <path d="M10 5v5l3 3" />
+              </svg>
+            </span>
+            <div>
+              <span class="contact-label">Hours</span>
+              <span class="contact-value">Mon-Fri, 9AM-6PM GMT</span>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Right column: Contact form -->
+      <div class="contact-form-card glass glass-shimmer glow-border rounded-xl p-8">
+        <div class="form-card-header" style="margin: -2rem -2rem 1.5rem -2rem; padding: 1.5rem 2rem; border-radius: var(--radius-xl) var(--radius-xl) 0 0; background: linear-gradient(135deg, rgba(0, 168, 168, 0.06) 0%, transparent 60%);">
+          <h3 class="text-lg font-semibold text-text-primary" style="margin: 0;">Send Us a Message</h3>
+        </div>
+
+        <form id="contact-form" class="contact-form" novalidate>
+          <input type="hidden" name="access_key" value={import.meta.env.PUBLIC_WEB3FORMS_KEY || siteConfig.web3formsKey} />
+          <input type="hidden" name="subject" value="New enquiry from fyniti.co.uk" />
+          <input type="hidden" name="from_name" value="FYNITI Contact Form" />
+          <input type="hidden" name="redirect" value="" />
+          <!-- Honeypot spam trap -->
+          <input type="checkbox" name="botcheck" class="hidden" style="display:none" />
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="contact-name" class="form-label">Name <span class="text-brand">*</span></label>
+              <input type="text" id="contact-name" name="name" required placeholder="Your name" autocomplete="name" class="form-input input-glow" />
+            </div>
+            <div class="form-group">
+              <label for="contact-email" class="form-label">Email <span class="text-brand">*</span></label>
+              <input type="email" id="contact-email" name="email" required placeholder="you@example.com" autocomplete="email" class="form-input input-glow" />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="contact-subject" class="form-label">Subject <span class="text-brand">*</span></label>
+            <input type="text" id="contact-subject" name="subject_line" required placeholder="How can we help?" class="form-input input-glow" />
+          </div>
+
+          <div class="form-group">
+            <label for="contact-service" class="form-label">Service Interested In</label>
+            <select id="contact-service" name="service" class="form-input input-glow form-select">
+              <option value="" disabled selected>Select a service</option>
+              {services.map((service) => (
+                <option value={service.title}>{service.title}</option>
+              ))}
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="contact-message" class="form-label">Message <span class="text-brand">*</span></label>
+            <textarea id="contact-message" name="message" required rows="5" placeholder="Tell us about your project..." class="form-input input-glow form-textarea"></textarea>
+          </div>
+
+          <button type="submit" class="form-submit" id="contact-submit">
+            <span class="submit-text">Send Message</span>
+            <span class="submit-sending" style="display:none">Sending...</span>
+          </button>
+
+          <!-- Status messages -->
+          <div id="form-success" class="form-status form-status--success" style="display:none">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            Message sent! We'll get back to you soon.
+          </div>
+          <div id="form-error" class="form-status form-status--error" style="display:none">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+            <span id="form-error-text">Something went wrong. Please try again.</span>
+          </div>
+        </form>
+
+        <script>
+          const form = document.getElementById('contact-form') as HTMLFormElement;
+          const btn = document.getElementById('contact-submit')!;
+          const successEl = document.getElementById('form-success')!;
+          const errorEl = document.getElementById('form-error')!;
+          const errorText = document.getElementById('form-error-text')!;
+
+          form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            // Basic validation
+            const name = (form.elements.namedItem('name') as HTMLInputElement).value.trim();
+            const email = (form.elements.namedItem('email') as HTMLInputElement).value.trim();
+            const message = (form.elements.namedItem('message') as HTMLTextAreaElement).value.trim();
+
+            if (!name || !email || !message) {
+              errorText.textContent = 'Please fill in all required fields.';
+              errorEl.style.display = 'flex';
+              successEl.style.display = 'none';
+              return;
+            }
+
+            // Check if Web3Forms key is configured
+            const key = (form.elements.namedItem('access_key') as HTMLInputElement).value;
+            if (!key) {
+              // Fallback: open mailto
+              const subj = (form.elements.namedItem('subject_line') as HTMLInputElement).value.trim();
+              const service = (form.elements.namedItem('service') as HTMLSelectElement).value;
+              const body = `Name: ${name}\nEmail: ${email}\nService: ${service}\n\n${message}`;
+              window.location.href = `mailto:contact@fyniti.co.uk?subject=${encodeURIComponent(subj || 'Website Enquiry')}&body=${encodeURIComponent(body)}`;
+              return;
+            }
+
+            // Submit via Web3Forms API
+            btn.querySelector('.submit-text')!.style.display = 'none';
+            btn.querySelector('.submit-sending')!.style.display = 'inline';
+            (btn as HTMLButtonElement).disabled = true;
+            errorEl.style.display = 'none';
+            successEl.style.display = 'none';
+
+            try {
+              const res = await fetch('https://api.web3forms.com/submit', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(Object.fromEntries(new FormData(form))),
+              });
+              const data = await res.json();
+
+              if (data.success) {
+                successEl.style.display = 'flex';
+                form.reset();
+              } else {
+                errorText.textContent = data.message || 'Something went wrong. Please try again.';
+                errorEl.style.display = 'flex';
+              }
+            } catch {
+              errorText.textContent = 'Network error. Please try again later.';
+              errorEl.style.display = 'flex';
+            } finally {
+              btn.querySelector('.submit-text')!.style.display = 'inline';
+              btn.querySelector('.submit-sending')!.style.display = 'none';
+              (btn as HTMLButtonElement).disabled = false;
+            }
+          });
+        </script>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    align-items: start;
+  }
+
+  @media (min-width: 768px) {
+    .contact-grid {
+      grid-template-columns: 1fr 1.25fr;
+      gap: 2.5rem;
+    }
+  }
+
+  /* ── Contact info ── */
+  .contact-info-header {
+    margin-bottom: 1.75rem;
+    position: relative;
+    padding-left: 0.875rem;
+  }
+
+  .contact-info-accent {
+    position: absolute;
+    left: 0;
+    top: 0.125rem;
+    bottom: 0.125rem;
+    width: 3px;
+    border-radius: 3px;
+    background: linear-gradient(180deg, var(--color-brand), var(--color-brand-light, #5BCDEC));
+  }
+
+  .contact-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1.75rem;
+  }
+
+  .contact-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 0.625rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+  }
+
+  .contact-item:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+
+  .contact-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
+    background: rgba(0, 168, 168, 0.1);
+    border-radius: var(--radius-sm);
+    color: var(--color-brand);
+  }
+
+  .contact-label {
+    display: block;
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--color-text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.125rem;
+  }
+
+  .contact-value {
+    display: block;
+    font-size: 0.9375rem;
+    color: var(--color-text-primary);
+    line-height: 1.5;
+  }
+
+  .contact-link {
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+
+  .contact-link:hover {
+    color: var(--color-brand);
+  }
+
+  /* ── Form ── */
+  .contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+
+  @media (min-width: 640px) {
+    .form-row {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.375rem;
+  }
+
+  .form-label {
+    font-size: 0.8125rem;
+    font-weight: 500;
+    color: var(--color-text-secondary);
+  }
+
+  .form-input {
+    width: 100%;
+    padding: 0.875rem 1.125rem;
+    font-size: 0.9375rem;
+    font-family: inherit;
+    color: var(--color-text-primary);
+    background: var(--color-bg-elevated);
+    border: 1px solid var(--color-border-default);
+    border-radius: var(--radius-md);
+    outline: none;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+  }
+
+  .form-input::placeholder {
+    color: var(--color-text-secondary);
+    opacity: 0.6;
+  }
+
+  .form-input:hover {
+    border-color: var(--color-border-hover, rgba(255, 255, 255, 0.15));
+  }
+
+  .form-input:focus {
+    border-color: var(--color-brand);
+    box-shadow: 0 0 0 3px rgba(0, 168, 168, 0.15);
+    background: rgba(0, 168, 168, 0.02);
+  }
+
+  .form-select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-color: var(--color-bg-elevated);
+    color: var(--color-text-primary);
+    background-image: url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%238B949E' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    padding-right: 2.5rem;
+    cursor: pointer;
+  }
+
+  .form-select option {
+    background-color: var(--color-bg-elevated);
+    color: var(--color-text-primary);
+  }
+
+  .form-textarea {
+    resize: vertical;
+    min-height: 120px;
+  }
+
+  .form-submit {
+    width: 100%;
+    padding: 1rem 1.75rem;
+    font-size: 1.0625rem;
+    font-weight: 600;
+    font-family: inherit;
+    color: #fff;
+    background: linear-gradient(135deg, var(--color-brand), var(--color-brand-light, #5BCDEC));
+    border: none;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: filter 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
+    box-shadow: 0 4px 14px rgba(0, 168, 168, 0.3);
+    letter-spacing: 0.01em;
+  }
+
+  .form-submit:hover {
+    filter: brightness(1.1);
+    box-shadow: 0 6px 20px rgba(0, 168, 168, 0.4);
+    transform: translateY(-1px);
+  }
+
+  .form-submit:active {
+    transform: scale(0.97) translateY(0);
+    box-shadow: 0 2px 8px rgba(0, 168, 168, 0.25);
+  }
+
+  .form-submit:focus-visible {
+    outline: 2px solid var(--color-brand-light);
+    outline-offset: 2px;
+  }
+
+  .form-submit:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+
+  /* ── Status messages ── */
+  .form-status {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1rem;
+    border-radius: var(--radius-sm, 6px);
+    font-size: 0.85rem;
+    font-weight: 500;
+    margin-top: 0.75rem;
+  }
+
+  .form-status--success {
+    color: #34d399;
+    background: rgba(52, 211, 153, 0.08);
+    border: 1px solid rgba(52, 211, 153, 0.2);
+  }
+
+  .form-status--error {
+    color: #f87171;
+    background: rgba(248, 113, 113, 0.08);
+    border: 1px solid rgba(248, 113, 113, 0.2);
+  }
+</style>

@@ -1,0 +1,457 @@
+---
+import { services } from '@data/site';
+import SectionHeader from '@components/SectionHeader.astro';
+import {
+  Lightbulb,
+  Cog,
+  Smartphone,
+  Palette,
+  ShoppingCart,
+  SearchCheck,
+  Megaphone,
+  Handshake,
+  TrendingUp,
+} from '@lucide/astro';
+
+const iconMap: Record<string, typeof Lightbulb> = {
+  'IT Solutions & Consulting': Lightbulb,
+  'Software Development': Cog,
+  'Web & Mobile Apps': Smartphone,
+  'Web Design & UI/UX': Palette,
+  'E-Commerce Solutions': ShoppingCart,
+  'Testing & QA': SearchCheck,
+  'Social Media & Video': Megaphone,
+  'BPO Services': Handshake,
+  'SEO & Digital Marketing': TrendingUp,
+};
+
+const animMap: Record<string, string> = {
+  'IT Solutions & Consulting': 'icon-pulse',
+  'Software Development': 'icon-spin',
+  'Web & Mobile Apps': 'icon-bounce',
+  'Web Design & UI/UX': 'icon-wiggle',
+  'E-Commerce Solutions': 'icon-shake',
+  'Testing & QA': 'icon-check',
+  'Social Media & Video': 'icon-ring',
+  'BPO Services': 'icon-wave',
+  'SEO & Digital Marketing': 'icon-rise',
+};
+---
+
+<section id="services" style="position: relative; overflow: hidden;">
+  <!-- Ambient orbs -->
+  <div class="ambient-orb" style="width:400px;height:400px;background:radial-gradient(circle,color-mix(in srgb, var(--color-brand) 6%, transparent) 0%,transparent 70%);top:-10%;right:-10%;" aria-hidden="true"></div>
+  <div class="ambient-orb" style="width:300px;height:300px;background:radial-gradient(circle,color-mix(in srgb, var(--color-brand-light) 5%, transparent) 0%,transparent 70%);bottom:5%;left:-8%;" aria-hidden="true"></div>
+
+  <div class="section">
+    <SectionHeader label="What We Do" title="Our Services" />
+
+    <div class="bento-grid" id="services-grid">
+      {services.map((service, index) => {
+        const IconComponent = iconMap[service.title];
+        const animClass = animMap[service.title] ?? 'icon-pulse';
+
+        return (
+          <div
+            class:list={[
+              'service-card glass rounded-xl',
+              { 'service-card--featured': service.featured },
+            ]}
+            style={`--i: ${index}`}
+          >
+            <div class="card-glimmer" aria-hidden="true"></div>
+
+            <div class="service-card__inner">
+              <div class="service-card__header">
+                <div class:list={['service-card__icon-wrap', animClass]}>
+                  {IconComponent && <IconComponent size={32} strokeWidth={1.5} class="service-card__lucide" />}
+                </div>
+                {service.featured && <span class="service-card__badge">Featured</span>}
+              </div>
+              <h3 class="service-card__title">{service.title}</h3>
+              <p class="service-card__desc">{service.description}</p>
+              <div class="service-card__tags">
+                {service.tags.map((tag) => (
+                  <span class="service-card__tag">{tag}</span>
+                ))}
+              </div>
+              <div class="service-card__arrow" aria-hidden="true">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+              </div>
+            </div>
+          </div>
+        );
+      })}
+    </div>
+  </div>
+</section>
+
+<style>
+  /* ── Bento grid ── */
+  .bento-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  @media (min-width: 768px) {
+    .bento-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.25rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .bento-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .service-card--featured {
+      grid-column: span 2;
+    }
+  }
+
+  /* ── Spotlight: dim siblings on grid hover ── */
+  .bento-grid:hover .service-card {
+    opacity: 0.45;
+    filter: grayscale(0.2);
+  }
+
+  .bento-grid:hover .service-card:hover {
+    opacity: 1;
+    filter: none;
+  }
+
+  /* ── Card ── */
+  .service-card {
+    position: relative;
+    overflow: hidden;
+    border: 1px solid var(--color-border-default);
+    transition:
+      transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+      opacity 0.35s ease,
+      filter 0.35s ease,
+      border-color 0.35s ease,
+      box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .service-card:hover {
+    transform: translateY(-6px) scale(1.02);
+    border-color: var(--color-border-hover);
+    box-shadow:
+      0 0 0 1px var(--color-border-hover),
+      0 12px 40px -8px color-mix(in srgb, var(--color-brand) 20%, transparent),
+      0 0 60px -12px color-mix(in srgb, var(--color-brand) 12%, transparent);
+  }
+
+  .service-card:active {
+    transform: translateY(-2px) scale(0.98);
+    transition-duration: 0.1s;
+  }
+
+  /* ── Cursor glimmer ── */
+  .card-glimmer {
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    opacity: 0;
+    transition: opacity 0.35s ease;
+    background: radial-gradient(
+      600px circle at var(--mx, 50%) var(--my, 50%),
+      color-mix(in srgb, var(--color-brand) 6%, transparent),
+      transparent 60%
+    );
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .service-card:hover .card-glimmer {
+    opacity: 1;
+  }
+
+  /* ── Featured card gradient accent ── */
+  .service-card--featured {
+    background: linear-gradient(
+      145deg,
+      color-mix(in srgb, var(--color-brand) 5%, var(--color-bg-surface)),
+      var(--color-bg-surface) 50%
+    );
+  }
+
+  .service-card--featured::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--color-brand), var(--color-brand-light), var(--color-brand-mint));
+    border-radius: 2px 2px 0 0;
+    z-index: 2;
+  }
+
+  /* ── Inner content ── */
+  .service-card__inner {
+    position: relative;
+    z-index: 2;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+
+  .service-card__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1.25rem;
+  }
+
+  /* ── Icon wrapper ── */
+  .service-card__icon-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 56px;
+    height: 56px;
+    border-radius: var(--radius-md);
+    background: color-mix(in srgb, var(--color-brand) 8%, transparent);
+    border: 1px solid color-mix(in srgb, var(--color-brand) 12%, transparent);
+    color: var(--color-brand);
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .service-card:hover .service-card__icon-wrap {
+    background: color-mix(in srgb, var(--color-brand) 15%, transparent);
+    border-color: color-mix(in srgb, var(--color-brand) 25%, transparent);
+    box-shadow: 0 0 20px -4px color-mix(in srgb, var(--color-brand) 25%, transparent);
+  }
+
+  :global(.service-card__lucide) {
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  /* ── Icon hover animations (unique per service) ── */
+
+  /* Pulse — gentle scale throb */
+  .service-card:hover .icon-pulse :global(.service-card__lucide) {
+    animation: iconPulse 0.6s ease-in-out;
+  }
+  @keyframes iconPulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+  }
+
+  /* Spin — gear rotation */
+  .service-card:hover .icon-spin :global(.service-card__lucide) {
+    animation: iconSpin 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  @keyframes iconSpin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(180deg); }
+  }
+
+  /* Bounce — mobile phone bounce */
+  .service-card:hover .icon-bounce :global(.service-card__lucide) {
+    animation: iconBounce 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  @keyframes iconBounce {
+    0%, 100% { transform: translateY(0); }
+    40% { transform: translateY(-8px); }
+    60% { transform: translateY(-4px); }
+  }
+
+  /* Wiggle — palette wiggle */
+  .service-card:hover .icon-wiggle :global(.service-card__lucide) {
+    animation: iconWiggle 0.5s ease-in-out;
+  }
+  @keyframes iconWiggle {
+    0%, 100% { transform: rotate(0deg); }
+    25% { transform: rotate(-12deg); }
+    75% { transform: rotate(12deg); }
+  }
+
+  /* Shake — cart shake */
+  .service-card:hover .icon-shake :global(.service-card__lucide) {
+    animation: iconShake 0.4s ease-in-out;
+  }
+  @keyframes iconShake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-4px); }
+    50% { transform: translateX(4px); }
+    75% { transform: translateX(-2px); }
+  }
+
+  /* Check — scale pop */
+  .service-card:hover .icon-check :global(.service-card__lucide) {
+    animation: iconCheck 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  @keyframes iconCheck {
+    0% { transform: scale(0.8); opacity: 0.5; }
+    50% { transform: scale(1.25); }
+    100% { transform: scale(1); opacity: 1; }
+  }
+
+  /* Ring — megaphone ring */
+  .service-card:hover .icon-ring :global(.service-card__lucide) {
+    animation: iconRing 0.6s ease-in-out;
+  }
+  @keyframes iconRing {
+    0%, 100% { transform: rotate(0deg); }
+    10% { transform: rotate(15deg); }
+    20% { transform: rotate(-10deg); }
+    30% { transform: rotate(10deg); }
+    40% { transform: rotate(-5deg); }
+    50% { transform: rotate(5deg); }
+  }
+
+  /* Wave — handshake wave */
+  .service-card:hover .icon-wave :global(.service-card__lucide) {
+    animation: iconWave 0.6s ease-in-out;
+  }
+  @keyframes iconWave {
+    0%, 100% { transform: rotate(0deg); }
+    20% { transform: rotate(20deg); }
+    40% { transform: rotate(-15deg); }
+    60% { transform: rotate(10deg); }
+    80% { transform: rotate(-5deg); }
+  }
+
+  /* Rise — trending up */
+  .service-card:hover .icon-rise :global(.service-card__lucide) {
+    animation: iconRise 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  @keyframes iconRise {
+    0% { transform: translateY(4px) scale(0.95); opacity: 0.6; }
+    100% { transform: translateY(-4px) scale(1.05); opacity: 1; }
+  }
+
+  .service-card__badge {
+    font-family: var(--font-mono);
+    font-size: 0.625rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-brand);
+    padding: 0.25rem 0.625rem;
+    border: 1px solid var(--color-border-hover);
+    border-radius: 9999px;
+    background: color-mix(in srgb, var(--color-brand) 8%, transparent);
+  }
+
+  .service-card__title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--color-text-primary);
+    margin: 0 0 0.75rem;
+    line-height: 1.3;
+    transition: color 0.3s ease;
+  }
+
+  .service-card:hover .service-card__title {
+    color: var(--color-brand);
+  }
+
+  .service-card__desc {
+    font-size: 0.9375rem;
+    line-height: 1.7;
+    color: var(--color-text-secondary);
+    margin: 0;
+    flex: 1;
+  }
+
+  /* ── Tags ── */
+  .service-card__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 1.5rem;
+  }
+
+  .service-card__tag {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.3rem 0.75rem;
+    font-size: 0.7rem;
+    font-weight: 500;
+    font-family: var(--font-mono);
+    color: var(--color-text-secondary);
+    background: color-mix(in srgb, var(--color-brand) 6%, transparent);
+    border: 1px solid color-mix(in srgb, var(--color-brand) 10%, transparent);
+    border-radius: 9999px;
+    letter-spacing: 0.02em;
+    white-space: nowrap;
+    transition: all 0.3s ease;
+  }
+
+  .service-card:hover .service-card__tag {
+    color: var(--color-brand);
+    background: color-mix(in srgb, var(--color-brand) 12%, transparent);
+    border-color: color-mix(in srgb, var(--color-brand) 20%, transparent);
+  }
+
+  /* ── Hover arrow ── */
+  .service-card__arrow {
+    position: absolute;
+    bottom: 1.25rem;
+    right: 1.25rem;
+    color: var(--color-brand);
+    opacity: 0;
+    transform: translateX(-8px);
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .service-card:hover .service-card__arrow {
+    opacity: 0.7;
+    transform: translateX(0);
+  }
+
+  /* ── Stagger entrance ── */
+  .service-card {
+    animation: cardEnter 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+    animation-delay: calc(var(--i) * 0.08s);
+  }
+
+  @keyframes cardEnter {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── Responsive ── */
+  @media (max-width: 767px) {
+    .service-card__inner {
+      padding: 1.5rem;
+    }
+
+    .bento-grid:hover .service-card {
+      opacity: 1;
+      filter: none;
+    }
+
+    .service-card__icon-wrap {
+      width: 48px;
+      height: 48px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .service-card:hover .service-card__icon-wrap :global(.service-card__lucide) {
+      animation: none;
+    }
+  }
+</style>
+
+<script>
+  const grid = document.getElementById('services-grid');
+  if (grid) {
+    for (const card of grid.querySelectorAll('.service-card')) {
+      card.addEventListener('mousemove', (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = ((e.clientX - rect.left) / rect.width) * 100;
+        const y = ((e.clientY - rect.top) / rect.height) * 100;
+        (card as HTMLElement).style.setProperty('--mx', `${x}%`);
+        (card as HTMLElement).style.setProperty('--my', `${y}%`);
+      });
+    }
+  }
+</script>

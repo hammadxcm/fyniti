@@ -1,0 +1,491 @@
+---
+
+---
+
+<section id="hero" class="relative flex items-center justify-center overflow-hidden bg-bg-base mt-16" style="min-height: calc(100dvh - 4rem);">
+  <!-- Particle / blood rain canvas -->
+  <canvas id="hero-canvas" class="absolute inset-0 w-full h-full pointer-events-none" aria-hidden="true"></canvas>
+  <!-- Matrix rain overlay canvas -->
+  <canvas id="matrix-canvas" class="absolute inset-0 w-full h-full pointer-events-none" aria-hidden="true" style="opacity:0.7;"></canvas>
+
+  <!-- Grid pattern overlay -->
+  <div class="grid-overlay absolute inset-0 pointer-events-none" aria-hidden="true"></div>
+
+  <!-- Gradient mesh background -->
+  <div class="gradient-mesh absolute inset-0 pointer-events-none" aria-hidden="true">
+    <div class="mesh-orb mesh-orb-1"></div>
+    <div class="mesh-orb mesh-orb-2"></div>
+    <div class="mesh-orb mesh-orb-3"></div>
+  </div>
+
+  <!-- Geometric floating shapes -->
+  <div class="geo-shapes absolute inset-0 pointer-events-none overflow-hidden" aria-hidden="true">
+    <div class="shape shape-1"></div>
+    <div class="shape shape-2"></div>
+    <div class="shape shape-3"></div>
+    <div class="shape shape-4"></div>
+    <div class="shape shape-5"></div>
+  </div>
+
+  <!-- Decorative floating code snippet -->
+  <div class="code-float absolute pointer-events-none hidden lg:block" aria-hidden="true">
+    <pre class="glass rounded-lg p-4 text-xs font-mono text-text-secondary/40 leading-relaxed"><code><span class="text-brand/50">const</span> <span class="text-brand-mint/50">fyniti</span> = {`{`}
+  <span class="text-brand-light/50">innovation</span>: <span class="text-brand/50">true</span>,
+  <span class="text-brand-light/50">quality</span>: <span class="text-brand/50">'exceptional'</span>,
+  <span class="text-brand-light/50">clients</span>: <span class="text-brand/50">'worldwide'</span>
+{`}`};</code></pre>
+  </div>
+
+  <!-- Content -->
+  <div class="relative z-10 text-center px-6 max-w-4xl mx-auto">
+    <!-- Greeting -->
+    <p class="hero-greeting opacity-0 font-mono text-sm md:text-base tracking-[0.15em] uppercase text-brand mb-6" data-i18n="hero.greeting">
+      Transforming Ideas Into Technology
+    </p>
+
+    <!-- Main title with glow ring -->
+    <div class="hero-name opacity-0 mb-6" style="perspective: 1000px; display: flex; justify-content: center; align-items: center;">
+      <div class="logo-container" id="hero-logo-tilt">
+        <div class="logo-glow-ring" aria-hidden="true"></div>
+        <svg class="hero-logo-svg morph-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 80" fill="currentColor" overflow="visible" aria-label="FYNITI">
+          <!-- F --><path class="morph-path" d="M0 0L56 0L56 12L0 12Z"/><path class="morph-path" d="M0 0L12 0L12 80L0 80Z"/><path class="morph-path" d="M0 34L40 34L40 46L0 46Z"/>
+          <!-- Y --><path class="morph-path" d="M76 0L88 0L88 28L76 28Z"/><path class="morph-path" d="M120 0L132 0L132 28L120 28Z"/><path class="morph-path" d="M86 22L100 22L100 34L86 34Z"/><path class="morph-path" d="M108 22L122 22L122 34L108 34Z"/><path class="morph-path" d="M96 32L112 32L112 80L96 80Z"/>
+          <!-- N --><path class="morph-path" d="M152 0L164 0L164 80L152 80Z"/><path class="morph-path" d="M208 0L220 0L220 80L208 80Z"/><path class="morph-path" d="M164 8L176 8L176 22L164 22Z"/><path class="morph-path" d="M174 20L186 20L186 34L174 34Z"/><path class="morph-path" d="M184 32L196 32L196 46L184 46Z"/><path class="morph-path" d="M196 44L208 44L208 58L196 58Z"/>
+          <!-- I --><path class="morph-path" d="M240 0L252 0L252 80L240 80Z"/>
+          <!-- T --><path class="morph-path" d="M272 0L328 0L328 12L272 12Z"/><path class="morph-path" d="M294 0L306 0L306 80L294 80Z"/>
+          <!-- I --><path class="morph-path" d="M348 0L360 0L360 80L348 80Z"/>
+          <!-- Energy pulse -->
+          <path class="morph-pulse" d="M180 40C206.3 24 232.5 8 270 8C303.1 8 330 22.3 330 40C330 57.7 303.1 72 270 72C232.5 72 206.3 56 180 40C153.8 24 127.5 8 90 8C56.9 8 30 22.3 30 40C30 57.7 56.9 72 90 72C127.5 72 153.8 56 180 40Z" fill="none" stroke="var(--color-brand)" stroke-width="3" stroke-linecap="round" pathLength="1"/>
+        </svg>
+      </div>
+    </div>
+
+    <!-- Subtitle -->
+    <p class="hero-subtitle opacity-0 text-xl md:text-2xl text-text-secondary font-light tracking-wide mb-8" data-i18n="hero.subtitle">
+      IT Solutions &amp; Digital Innovation
+    </p>
+
+    <!-- Typewriter -->
+    <div class="hero-typewriter opacity-0 flex items-center justify-center gap-1 mb-10 h-8">
+      <span class="font-mono text-brand text-lg" aria-hidden="true">&rsaquo; </span>
+      <span id="typewriter" class="font-mono text-lg text-text-primary" role="status" aria-live="polite"></span>
+      <span class="cursor font-mono text-brand text-lg" aria-hidden="true">|</span>
+    </div>
+
+    <!-- CTAs -->
+    <div class="hero-ctas opacity-0 flex flex-col sm:flex-row gap-4 justify-center items-center mt-10">
+      <a href="#services" class="cta-outline inline-flex items-center justify-center gap-2 px-8 py-3.5 text-sm font-medium rounded-md transition-all duration-300">
+        <span>Explore Services</span>
+        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+        </svg>
+      </a>
+      <a href="#contact" class="cta-filled inline-flex items-center justify-center gap-2 px-8 py-3.5 text-sm font-medium rounded-md transition-all duration-300">
+        <span>Get in Touch</span>
+        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+        </svg>
+      </a>
+    </div>
+  </div>
+
+  <!-- Scroll indicator -->
+  <div class="absolute bottom-3 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 opacity-60">
+    <span class="text-xs font-mono text-text-secondary tracking-widest uppercase">Scroll</span>
+    <div class="scroll-indicator w-6 h-10 rounded-full border-2 border-text-secondary/40 flex items-start justify-center p-1.5">
+      <div class="scroll-dot w-1.5 h-1.5 rounded-full bg-brand"></div>
+    </div>
+  </div>
+
+  <!-- Bottom gradient fade -->
+  <div class="absolute bottom-0 left-0 right-0 h-6 bg-gradient-to-t from-bg-base to-transparent pointer-events-none"></div>
+</section>
+
+<style>
+  /* ── Grid pattern overlay (theme-reactive) ── */
+  .grid-overlay {
+    background-image:
+      linear-gradient(color-mix(in srgb, var(--color-brand) 3%, transparent) 1px, transparent 1px),
+      linear-gradient(90deg, color-mix(in srgb, var(--color-brand) 3%, transparent) 1px, transparent 1px);
+    background-size: 60px 60px;
+    transition: background-image 0.35s ease;
+  }
+
+  /* ── Gradient mesh (theme-reactive) ── */
+  .mesh-orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(100px);
+    transition: background 0.5s ease;
+  }
+
+  .mesh-orb-1 {
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, color-mix(in srgb, var(--color-brand) 8%, transparent) 0%, transparent 70%);
+    top: -10%;
+    left: -10%;
+    animation: meshDrift-1 30s ease-in-out infinite;
+  }
+
+  .mesh-orb-2 {
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, color-mix(in srgb, var(--color-brand-light) 6%, transparent) 0%, transparent 70%);
+    bottom: -15%;
+    right: -5%;
+    animation: meshDrift-2 25s ease-in-out infinite;
+    animation-delay: -10s;
+  }
+
+  .mesh-orb-3 {
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, color-mix(in srgb, var(--color-brand-mint) 4%, transparent) 0%, transparent 70%);
+    top: 40%;
+    left: 50%;
+    animation: meshDrift-3 35s ease-in-out infinite;
+    animation-delay: -15s;
+  }
+
+  @keyframes meshDrift-1 {
+    0%, 100% { transform: translate(0, 0); }
+    50% { transform: translate(60px, 40px); }
+  }
+
+  @keyframes meshDrift-2 {
+    0%, 100% { transform: translate(0, 0); }
+    50% { transform: translate(-50px, -30px); }
+  }
+
+  @keyframes meshDrift-3 {
+    0%, 100% { transform: translate(0, 0); }
+    33% { transform: translate(-40px, 30px); }
+    66% { transform: translate(30px, -20px); }
+  }
+
+  /* ── Geometric shapes (already theme-reactive via CSS vars) ── */
+  .shape {
+    position: absolute;
+    border-radius: 50%;
+    opacity: 0.15;
+    filter: blur(1px);
+    transition: background 0.35s ease;
+  }
+
+  .shape-1 {
+    width: 300px;
+    height: 300px;
+    background: var(--color-brand);
+    top: 10%;
+    left: -5%;
+    animation: float-1 20s ease-in-out infinite;
+  }
+
+  .shape-2 {
+    width: 200px;
+    height: 200px;
+    background: var(--color-brand-light);
+    top: 60%;
+    right: -3%;
+    animation: float-2 25s ease-in-out infinite;
+    animation-delay: -5s;
+  }
+
+  .shape-3 {
+    width: 150px;
+    height: 150px;
+    background: var(--color-brand-mint);
+    bottom: 15%;
+    left: 15%;
+    border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+    animation: float-3 18s ease-in-out infinite;
+    animation-delay: -3s;
+  }
+
+  .shape-4 {
+    width: 80px;
+    height: 80px;
+    background: var(--color-brand);
+    top: 25%;
+    right: 20%;
+    border-radius: 0;
+    transform: rotate(45deg);
+    animation: float-4 22s ease-in-out infinite;
+    animation-delay: -8s;
+  }
+
+  .shape-5 {
+    width: 120px;
+    height: 120px;
+    background: var(--color-brand-light);
+    top: 70%;
+    left: 60%;
+    clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+    border-radius: 0;
+    animation: float-5 24s ease-in-out infinite;
+    animation-delay: -12s;
+  }
+
+  @keyframes float-1 {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    25% { transform: translate(40px, -30px) scale(1.05); }
+    50% { transform: translate(20px, 40px) scale(0.95); }
+    75% { transform: translate(-30px, 20px) scale(1.02); }
+  }
+
+  @keyframes float-2 {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    25% { transform: translate(-30px, 40px) scale(1.08); }
+    50% { transform: translate(-50px, -20px) scale(0.92); }
+    75% { transform: translate(20px, -40px) scale(1.04); }
+  }
+
+  @keyframes float-3 {
+    0%, 100% { transform: translate(0, 0) rotate(0deg); }
+    33% { transform: translate(30px, -40px) rotate(120deg); }
+    66% { transform: translate(-20px, 30px) rotate(240deg); }
+  }
+
+  @keyframes float-4 {
+    0%, 100% { transform: rotate(45deg) translate(0, 0); }
+    25% { transform: rotate(55deg) translate(20px, -30px); }
+    50% { transform: rotate(40deg) translate(-10px, 20px); }
+    75% { transform: rotate(50deg) translate(15px, 10px); }
+  }
+
+  @keyframes float-5 {
+    0%, 100% { transform: translate(0, 0) rotate(0deg); }
+    33% { transform: translate(-25px, -35px) rotate(15deg); }
+    66% { transform: translate(30px, 20px) rotate(-10deg); }
+  }
+
+  /* ── Logo container with glow ring ── */
+  .logo-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem 2rem;
+    transform-style: preserve-3d;
+    will-change: transform;
+    cursor: default;
+  }
+
+  .logo-glow-ring {
+    position: absolute;
+    inset: -8px;
+    border-radius: 24px;
+    background: linear-gradient(135deg,
+      color-mix(in srgb, var(--color-brand) 15%, transparent),
+      color-mix(in srgb, var(--color-brand-light) 8%, transparent),
+      color-mix(in srgb, var(--color-brand-mint) 5%, transparent)
+    );
+    filter: blur(20px);
+    animation: ringPulse 4s ease-in-out infinite;
+    transition: background 0.35s ease;
+  }
+
+  @keyframes ringPulse {
+    0%, 100% { opacity: 0.4; transform: scale(1); }
+    50% { opacity: 0.7; transform: scale(1.05); }
+  }
+
+  /* ── Hero logo (inline SVG with morph) ── */
+  .hero-logo-svg {
+    position: relative;
+    z-index: 1;
+    height: clamp(70px, 14vw, 140px);
+    width: auto;
+    animation: logoFloat 6s ease-in-out infinite;
+    filter: drop-shadow(0 0 20px color-mix(in srgb, var(--color-brand) 30%, transparent));
+    transition: filter 0.35s ease;
+  }
+
+  .hero-logo-svg .morph-path {
+    fill: var(--color-brand);
+    stroke: var(--color-brand);
+    stroke-width: 0;
+    transition: fill 0.3s ease, stroke-width 0.3s ease, filter 0.3s ease;
+  }
+
+  .hero-logo-svg .morph-path.is-hollow {
+    fill: none;
+    stroke-width: 5;
+    animation: heroInfBreathe 2.5s ease-in-out infinite;
+  }
+
+  /* Hero infinity: bigger glow + color shimmer cycling brand → brand-light → brand-mint */
+  @keyframes heroInfBreathe {
+    0%, 100% {
+      filter: drop-shadow(0 0 8px var(--color-brand))
+              drop-shadow(0 0 16px color-mix(in srgb, var(--color-brand) 40%, transparent));
+      stroke: var(--color-brand);
+    }
+    33% {
+      filter: drop-shadow(0 0 12px var(--color-brand-light))
+              drop-shadow(0 0 24px color-mix(in srgb, var(--color-brand-light) 50%, transparent));
+      stroke: var(--color-brand-light);
+    }
+    66% {
+      filter: drop-shadow(0 0 10px var(--color-brand-mint))
+              drop-shadow(0 0 20px color-mix(in srgb, var(--color-brand-mint) 45%, transparent));
+      stroke: var(--color-brand-mint);
+    }
+  }
+
+  .hero-logo-svg .morph-pulse {
+    stroke-dasharray: 0.12 0.88;
+    opacity: 0;
+    filter: drop-shadow(0 0 12px var(--color-brand))
+            drop-shadow(0 0 24px var(--color-brand));
+    animation: heroPulseFlow 1.2s linear infinite;
+    transition: opacity 0.4s ease;
+  }
+
+  @keyframes heroPulseFlow {
+    from { stroke-dashoffset: 0; }
+    to { stroke-dashoffset: -1; }
+  }
+
+  @keyframes logoFloat {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+  }
+
+  .logo-container:hover .hero-logo-svg {
+    filter: drop-shadow(0 0 30px color-mix(in srgb, var(--color-brand) 60%, transparent));
+  }
+
+  .logo-container:hover .logo-glow-ring {
+    opacity: 0.9;
+    transform: scale(1.1);
+  }
+
+  /* ── Floating code snippet ── */
+  .code-float {
+    top: 18%;
+    right: 5%;
+    transform: rotate(3deg);
+    opacity: 0.4;
+    animation: codeFloat 20s ease-in-out infinite;
+  }
+
+  @keyframes codeFloat {
+    0%, 100% { transform: rotate(3deg) translate(0, 0); }
+    50% { transform: rotate(2deg) translate(-10px, 15px); }
+  }
+
+  /* ── Cursor blink ── */
+  .cursor {
+    animation: blink 1s step-end infinite;
+  }
+
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+  }
+
+  /* ── Scroll indicator ── */
+  .scroll-dot {
+    animation: scrollBounce 2s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+  }
+
+  @keyframes scrollBounce {
+    0%, 100% { transform: translateY(0); opacity: 1; }
+    50% { transform: translateY(16px); opacity: 0.2; }
+  }
+
+  /* ── CTA buttons (theme-reactive) ── */
+  .cta-outline {
+    color: var(--color-brand);
+    border: 1px solid var(--color-brand);
+    background: transparent;
+    transition: all 0.3s ease;
+  }
+
+  .cta-outline:hover {
+    background: color-mix(in srgb, var(--color-brand) 10%, transparent);
+    border-color: var(--color-brand-light);
+    color: var(--color-brand-light);
+    box-shadow: 0 0 24px -4px color-mix(in srgb, var(--color-brand) 30%, transparent);
+    transform: translateY(-2px);
+  }
+
+  .cta-filled {
+    color: var(--color-bg-base);
+    font-weight: 600;
+    background: linear-gradient(135deg, var(--color-brand) 0%, var(--color-brand-light) 100%);
+    border: 1px solid transparent;
+    transition: all 0.3s ease;
+  }
+
+  .cta-filled:hover {
+    box-shadow: 0 0 30px -4px color-mix(in srgb, var(--color-brand) 40%, transparent);
+    filter: brightness(1.1);
+    transform: translateY(-2px);
+  }
+
+  /* ── Responsive ── */
+  @media (max-width: 768px) {
+    .shape-1 { width: 180px; height: 180px; }
+    .shape-2 { width: 120px; height: 120px; }
+    .shape-3 { width: 90px; height: 90px; }
+    .shape-4 { width: 50px; height: 50px; }
+    .shape-5 { width: 70px; height: 70px; }
+    .mesh-orb-1 { width: 300px; height: 300px; }
+    .mesh-orb-2 { width: 250px; height: 250px; }
+    .mesh-orb-3 { width: 200px; height: 200px; }
+    .logo-container { padding: 1rem 2rem; }
+    .logo-container:hover .hero-logo-glitch { opacity: 0.4; }
+  }
+
+  /* ── Reduced motion ── */
+  @media (prefers-reduced-motion: reduce) {
+    .shape, .cursor, .scroll-dot,
+    .mesh-orb, .code-float,
+    .hero-logo-img, .logo-glow-ring {
+      animation: none;
+    }
+    .hero-logo-glitch { display: none; }
+    .scroll-dot { opacity: 1; }
+    .hero-logo-img {
+      filter: brightness(0) invert(1);
+    }
+  }
+</style>
+
+<script>
+  import { initParticleCanvas } from '@scripts/canvas';
+  import { initMatrixRain } from '@scripts/matrix-rain';
+  import { initTypewriter } from '@scripts/typewriter';
+  import { heroTypewriterWords } from '@data/site';
+
+  initParticleCanvas('hero-canvas');
+  initMatrixRain();
+  initTypewriter('typewriter', heroTypewriterWords);
+
+  // Mouse-following 3D tilt on logo
+  function initLogoTilt(): void {
+    const container = document.getElementById('hero-logo-tilt');
+    if (!container) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    const MAX_TILT = 8;
+
+    container.addEventListener('mousemove', (e: MouseEvent) => {
+      const rect = container.getBoundingClientRect();
+      const normX = ((e.clientX - rect.left) / rect.width - 0.5) * 2;
+      const normY = ((e.clientY - rect.top) / rect.height - 0.5) * 2;
+      container.style.transition = 'none';
+      container.style.transform = `rotateX(${-normY * MAX_TILT}deg) rotateY(${normX * MAX_TILT}deg)`;
+    });
+
+    container.addEventListener('mouseleave', () => {
+      container.style.transition = 'transform 0.5s cubic-bezier(0.16, 1, 0.3, 1)';
+      container.style.transform = 'rotateX(0deg) rotateY(0deg)';
+    });
+  }
+
+  initLogoTilt();
+</script>

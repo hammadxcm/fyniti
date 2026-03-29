@@ -1,0 +1,474 @@
+---
+import { navLinks, siteConfig } from '@data/site';
+---
+
+<nav id="main-nav" class="fixed top-0 left-0 w-full z-50 transition-all duration-300" style="background: color-mix(in srgb, var(--color-bg-base) 60%, transparent); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);">
+  <div class="max-w-[1200px] mx-auto px-6 h-16 flex items-center justify-between">
+    <!-- Logo -->
+    <a href="#" id="nav-logo-link" class="hover:text-brand-light transition-colors duration-300">
+      <div class="nav-logo-wrap">
+        <svg id="logo-morph-svg" class="nav-logo-svg morph-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 80" fill="currentColor" overflow="visible" aria-label="FYNITI">
+          <!-- F --><path class="morph-path" d="M0 0L56 0L56 12L0 12Z"/><path class="morph-path" d="M0 0L12 0L12 80L0 80Z"/><path class="morph-path" d="M0 34L40 34L40 46L0 46Z"/>
+          <!-- Y --><path class="morph-path" d="M76 0L88 0L88 28L76 28Z"/><path class="morph-path" d="M120 0L132 0L132 28L120 28Z"/><path class="morph-path" d="M86 22L100 22L100 34L86 34Z"/><path class="morph-path" d="M108 22L122 22L122 34L108 34Z"/><path class="morph-path" d="M96 32L112 32L112 80L96 80Z"/>
+          <!-- N --><path class="morph-path" d="M152 0L164 0L164 80L152 80Z"/><path class="morph-path" d="M208 0L220 0L220 80L208 80Z"/><path class="morph-path" d="M164 8L176 8L176 22L164 22Z"/><path class="morph-path" d="M174 20L186 20L186 34L174 34Z"/><path class="morph-path" d="M184 32L196 32L196 46L184 46Z"/><path class="morph-path" d="M196 44L208 44L208 58L196 58Z"/>
+          <!-- I --><path class="morph-path" d="M240 0L252 0L252 80L240 80Z"/>
+          <!-- T --><path class="morph-path" d="M272 0L328 0L328 12L272 12Z"/><path class="morph-path" d="M294 0L306 0L306 80L294 80Z"/>
+          <!-- I --><path class="morph-path" d="M348 0L360 0L360 80L348 80Z"/>
+          <!-- Energy pulse (visible only during infinity hold) -->
+          <path class="morph-pulse" d="M180 40C206.3 24 232.5 8 270 8C303.1 8 330 22.3 330 40C330 57.7 303.1 72 270 72C232.5 72 206.3 56 180 40C153.8 24 127.5 8 90 8C56.9 8 30 22.3 30 40C30 57.7 56.9 72 90 72C127.5 72 153.8 56 180 40Z" fill="none" stroke="var(--color-brand)" stroke-width="3" stroke-linecap="round" pathLength="1"/>
+        </svg>
+      </div>
+    </a>
+
+    <!-- Desktop nav links -->
+    <ul id="nav-menu" class="hidden lg:flex items-center gap-8">
+      {navLinks.map((link) => (
+        <li>
+          <a
+            href={link.href}
+            class="nav-link relative text-sm font-medium text-text-secondary hover:text-brand transition-colors duration-300"
+            data-i18n={`nav.${link.label.toLowerCase()}`}
+          >
+            {link.label}
+          </a>
+        </li>
+      ))}
+    </ul>
+
+    <!-- CTA + Theme Toggle + Hamburger -->
+    <div class="flex items-center gap-2 lg:gap-3">
+      <a
+        href="#contact"
+        class="hidden lg:inline-flex items-center gap-2 px-4 py-2 text-xs lg:text-sm font-medium text-brand border border-brand rounded-md hover:bg-brand hover:text-bg-base transition-all duration-300"
+        data-i18n="nav.cta"
+      >
+        Get in Touch
+      </a>
+
+      <!-- Theme switcher -->
+      <div class="theme-switcher">
+        <button
+          id="theme-toggle-btn"
+          class="theme-toggle-btn"
+          aria-label="Switch theme"
+          aria-expanded="false"
+          aria-haspopup="listbox"
+        >
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="4"/>
+            <path d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32l1.41 1.41M2 12h2m16 0h2M4.93 19.07l1.41-1.41m11.32-11.32l1.41-1.41"/>
+          </svg>
+        </button>
+        <div id="theme-dropdown" class="theme-dropdown" role="listbox" aria-label="Select theme">
+          <button class="theme-option" data-theme="hacker" role="option" aria-selected="false"><span class="theme-swatch" style="background:#00A8A8;"></span><span class="theme-label">Hacker</span></button>
+          <button class="theme-option" data-theme="dracula" role="option" aria-selected="false"><span class="theme-swatch" style="background:#BD93F9;"></span><span class="theme-label">Dracula</span></button>
+          <button class="theme-option" data-theme="nord" role="option" aria-selected="false"><span class="theme-swatch" style="background:#88C0D0;"></span><span class="theme-label">Nord</span></button>
+          <button class="theme-option" data-theme="catppuccin" role="option" aria-selected="false"><span class="theme-swatch" style="background:#CBA6F7;"></span><span class="theme-label">Catppuccin</span></button>
+          <button class="theme-option" data-theme="synthwave" role="option" aria-selected="false"><span class="theme-swatch" style="background:#FF2E97;"></span><span class="theme-label">Synthwave</span></button>
+          <button class="theme-option" data-theme="matrix" role="option" aria-selected="false"><span class="theme-swatch" style="background:#00FF41;"></span><span class="theme-label">Matrix</span></button>
+          <button class="theme-option" data-theme="bloodmoon" role="option" aria-selected="false"><span class="theme-swatch" style="background:#FF0040;"></span><span class="theme-label">Blood Moon</span></button>
+          <button class="theme-option" data-theme="midnight" role="option" aria-selected="false"><span class="theme-swatch" style="background:#7B73FF;"></span><span class="theme-label">Midnight</span></button>
+          <button class="theme-option" data-theme="arctic" role="option" aria-selected="false"><span class="theme-swatch" style="background:#0369A1;"></span><span class="theme-label">Arctic</span></button>
+          <button class="theme-option" data-theme="gruvbox" role="option" aria-selected="false"><span class="theme-swatch" style="background:#FABD2F;"></span><span class="theme-label">Gruvbox</span></button>
+          <button class="theme-option" data-theme="cyberpunk" role="option" aria-selected="false"><span class="theme-swatch" style="background:#FFD700;"></span><span class="theme-label">Cyberpunk</span></button>
+          <button class="theme-option" data-theme="nebula" role="option" aria-selected="false"><span class="theme-swatch" style="background:#E040FB;"></span><span class="theme-label">Nebula</span></button>
+          <button class="theme-option" data-theme="solarized" role="option" aria-selected="false"><span class="theme-swatch" style="background:#268BD2;"></span><span class="theme-label">Solarized</span></button>
+          <button class="theme-option" data-theme="rosepine" role="option" aria-selected="false"><span class="theme-swatch" style="background:#EA9A97;"></span><span class="theme-label">Rosé Pine</span></button>
+          <button class="theme-option" data-theme="monokai" role="option" aria-selected="false"><span class="theme-swatch" style="background:#A6E22E;"></span><span class="theme-label">Monokai</span></button>
+        </div>
+      </div>
+
+      <!-- Random theme button (hidden on mobile) -->
+      <button
+        id="theme-random-btn"
+        class="theme-toggle-btn hidden sm:flex"
+        aria-label="Random theme"
+        title="Random theme"
+      >
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="2" y="2" width="20" height="20" rx="3"/><circle cx="8" cy="8" r="1.5" fill="currentColor"/><circle cx="16" cy="8" r="1.5" fill="currentColor"/><circle cx="8" cy="16" r="1.5" fill="currentColor"/><circle cx="16" cy="16" r="1.5" fill="currentColor"/><circle cx="12" cy="12" r="1.5" fill="currentColor"/>
+        </svg>
+      </button>
+
+      <!-- Language switcher -->
+      <div class="lang-switcher">
+        <button
+          id="lang-toggle-btn"
+          class="theme-toggle-btn"
+          aria-label="Switch language"
+          aria-expanded="false"
+          aria-haspopup="true"
+        >
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+          </svg>
+        </button>
+        <div id="lang-dropdown" class="lang-dropdown" role="listbox" aria-label="Select language">
+          <button class="lang-option active" data-lang="en" role="option" aria-selected="true"><span class="lang-code">EN</span><span class="lang-name">English</span></button>
+          <button class="lang-option" data-lang="es" role="option" aria-selected="false"><span class="lang-code">ES</span><span class="lang-name">Español</span></button>
+          <button class="lang-option" data-lang="fr" role="option" aria-selected="false"><span class="lang-code">FR</span><span class="lang-name">Français</span></button>
+          <button class="lang-option" data-lang="de" role="option" aria-selected="false"><span class="lang-code">DE</span><span class="lang-name">Deutsch</span></button>
+          <button class="lang-option" data-lang="pt" role="option" aria-selected="false"><span class="lang-code">PT</span><span class="lang-name">Português</span></button>
+          <button class="lang-option" data-lang="ru" role="option" aria-selected="false"><span class="lang-code">RU</span><span class="lang-name">Русский</span></button>
+          <button class="lang-option" data-lang="zh" role="option" aria-selected="false"><span class="lang-code">ZH</span><span class="lang-name">中文</span></button>
+          <button class="lang-option" data-lang="hi" role="option" aria-selected="false"><span class="lang-code">HI</span><span class="lang-name">हिन्दी</span></button>
+          <button class="lang-option" data-lang="ar" role="option" aria-selected="false"><span class="lang-code">AR</span><span class="lang-name">العربية</span></button>
+          <button class="lang-option" data-lang="ur" role="option" aria-selected="false"><span class="lang-code">UR</span><span class="lang-name">اردو</span></button>
+        </div>
+      </div>
+
+      <button
+        id="nav-toggle"
+        class="lg:hidden relative w-10 h-10 flex items-center justify-center rounded-md text-text-primary hover:text-brand transition-colors duration-300"
+        aria-label="Toggle navigation menu"
+        aria-expanded="false"
+        aria-controls="mobile-menu"
+      >
+        <div class="hamburger-lines w-6 h-5 relative flex flex-col justify-between">
+          <span class="hamburger-line block h-[2px] w-full bg-current rounded-sm transition-all duration-300 origin-center"></span>
+          <span class="hamburger-line block h-[2px] w-full bg-current rounded-sm transition-all duration-300 origin-center"></span>
+          <span class="hamburger-line block h-[2px] w-full bg-current rounded-sm transition-all duration-300 origin-center"></span>
+        </div>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile menu -->
+  <div
+    id="mobile-menu"
+    class="mobile-menu lg:hidden"
+    role="navigation"
+    aria-label="Mobile navigation"
+  >
+    <ul class="flex flex-col items-center gap-6 py-8">
+      {navLinks.map((link) => (
+        <li>
+          <a
+            href={link.href}
+            class="nav-link text-lg font-medium text-text-secondary hover:text-brand transition-colors duration-300"
+            data-i18n={`nav.${link.label.toLowerCase()}`}
+          >
+            {link.label}
+          </a>
+        </li>
+      ))}
+      <li class="pt-4">
+        <a
+          href="#contact"
+          class="inline-flex items-center gap-2 px-6 py-3 text-sm font-medium text-brand border border-brand rounded-md hover:bg-brand hover:text-bg-base transition-all duration-300"
+          data-i18n="nav.cta"
+        >
+          Get in Touch
+        </a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<style>
+  #nav-logo-link {
+    transition: transform 0.2s ease-out;
+  }
+
+  .nav-logo-wrap {
+    position: relative;
+    height: 20px;
+    animation: navLogoGlow 4s ease-in-out infinite;
+    will-change: filter;
+    transition: filter 0.3s ease;
+  }
+
+  .nav-logo-wrap:hover {
+    filter: drop-shadow(0 0 6px var(--color-brand))
+            drop-shadow(0 0 12px var(--color-brand));
+  }
+
+  /* ── Logo SVG: brand/accent color, theme-aware ── */
+  .nav-logo-svg {
+    height: 20px;
+    width: auto;
+  }
+
+  .morph-path {
+    fill: var(--color-brand);
+    stroke: var(--color-brand);
+    stroke-width: 0;
+    transition: fill 0.3s ease, stroke-width 0.3s ease, filter 0.3s ease;
+  }
+
+  /* Hollow glowing infinity — JS toggles this class per-path */
+  .morph-path.is-hollow {
+    fill: none;
+    stroke-width: 5;
+    filter: drop-shadow(0 0 6px var(--color-brand))
+            drop-shadow(0 0 12px color-mix(in srgb, var(--color-brand) 40%, transparent));
+    animation: infBreathe 2s ease-in-out infinite;
+  }
+
+  /* Breathing glow on hollow infinity paths */
+  @keyframes infBreathe {
+    0%, 100% {
+      filter: drop-shadow(0 0 4px var(--color-brand))
+              drop-shadow(0 0 8px color-mix(in srgb, var(--color-brand) 30%, transparent));
+    }
+    50% {
+      filter: drop-shadow(0 0 8px var(--color-brand))
+              drop-shadow(0 0 18px color-mix(in srgb, var(--color-brand) 50%, transparent));
+    }
+  }
+
+  /* ── Energy pulse: brand-colored comet flowing along infinity ── */
+  .morph-pulse {
+    stroke-dasharray: 0.12 0.88;
+    opacity: 0;
+    filter: drop-shadow(0 0 8px var(--color-brand))
+            drop-shadow(0 0 16px var(--color-brand));
+    animation: morphPulseFlow 1s linear infinite;
+    transition: opacity 0.4s ease;
+  }
+
+  @keyframes morphPulseFlow {
+    from { stroke-dashoffset: 0; }
+    to { stroke-dashoffset: -1; }
+  }
+
+  @keyframes navLogoGlow {
+    0%, 100% { filter: drop-shadow(0 0 0px transparent); }
+    50% { filter: drop-shadow(0 0 4px var(--color-brand)); }
+  }
+
+  /* ── Theme switcher ── */
+  .theme-switcher {
+    position: relative;
+  }
+
+  .theme-toggle-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    border: 1px solid var(--color-border-default);
+    background: transparent;
+    color: var(--color-text-secondary);
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .theme-toggle-btn:hover {
+    border-color: var(--color-brand);
+    color: var(--color-brand);
+  }
+
+  .theme-dropdown,
+  .lang-dropdown {
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 0;
+    min-width: 180px;
+    padding: 0.5rem;
+    background: var(--color-bg-elevated);
+    border: 1px solid var(--color-border-default);
+    border-radius: 12px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-8px);
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    z-index: 9999;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    max-height: 400px;
+    overflow-y: auto;
+  }
+
+  .theme-dropdown::-webkit-scrollbar,
+  .lang-dropdown::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  .theme-dropdown::-webkit-scrollbar-thumb,
+  .lang-dropdown::-webkit-scrollbar-thumb {
+    background: var(--color-border-default);
+    border-radius: 4px;
+  }
+
+  .theme-dropdown.open,
+  .lang-dropdown.open {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+  .theme-option,
+  .lang-option {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    width: 100%;
+    padding: 0.5rem 0.75rem;
+    border: none;
+    border-radius: 8px;
+    background: transparent;
+    color: var(--color-text-primary);
+    cursor: pointer;
+    font-size: 0.8rem;
+    font-family: var(--font-mono);
+    transition: background 0.2s;
+    text-align: left;
+  }
+
+  .theme-option:hover,
+  .lang-option:hover {
+    background: var(--glass-bg);
+  }
+
+  .theme-option.active,
+  .lang-option.active {
+    background: var(--glass-bg);
+    color: var(--color-brand);
+  }
+
+  .theme-option.active .theme-swatch {
+    box-shadow: 0 0 0 2px var(--color-bg-elevated), 0 0 0 4px var(--color-brand);
+  }
+
+  .theme-swatch {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    transition: box-shadow 0.2s;
+  }
+
+  /* ── Nav states ── */
+  #main-nav {
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+                background-color 0.3s ease,
+                border-color 0.3s ease;
+  }
+
+  #main-nav.scrolled {
+    background: color-mix(in srgb, var(--color-bg-base) 85%, transparent);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--color-border-default);
+  }
+
+  #main-nav.nav-hidden {
+    transform: translateY(-100%);
+  }
+
+  /* ── Active link indicator ── */
+  .nav-link {
+    transition: color 0.3s ease, text-shadow 0.3s ease;
+  }
+
+  .nav-link.active {
+    color: var(--color-brand);
+    text-shadow: 0 0 8px color-mix(in srgb, var(--color-brand) 25%, transparent);
+  }
+
+  .nav-link:hover {
+    color: var(--color-brand);
+    text-shadow: 0 0 12px color-mix(in srgb, var(--color-brand) 30%, transparent);
+  }
+
+  .nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--color-brand), var(--color-brand-light));
+    border-radius: 1px;
+    transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 0 0 6px color-mix(in srgb, var(--color-brand) 20%, transparent);
+  }
+
+  .nav-link:hover::after,
+  .nav-link.active::after {
+    width: 100%;
+  }
+
+  /* ── Hamburger animation ── */
+  .open .hamburger-line:nth-child(1) {
+    transform: translateY(9px) rotate(45deg);
+  }
+
+  .open .hamburger-line:nth-child(2) {
+    opacity: 0;
+    transform: scaleX(0);
+  }
+
+  .open .hamburger-line:nth-child(3) {
+    transform: translateY(-9px) rotate(-45deg);
+  }
+
+  /* ── Mobile menu ── */
+  .mobile-menu {
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    background: color-mix(in srgb, var(--color-bg-base) 95%, transparent);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid transparent;
+    transition: max-height 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+                opacity 0.3s ease,
+                border-color 0.3s ease;
+  }
+
+  .mobile-menu.open {
+    max-height: 100dvh;
+    opacity: 1;
+    border-bottom: 1px solid rgba(91, 205, 236, 0.08);
+  }
+
+  /* Mobile menu links entrance stagger */
+  .mobile-menu.open li {
+    animation: menuFadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    opacity: 0;
+  }
+
+  .mobile-menu.open li:nth-child(1) { animation-delay: 0.05s; }
+  .mobile-menu.open li:nth-child(2) { animation-delay: 0.1s; }
+  .mobile-menu.open li:nth-child(3) { animation-delay: 0.15s; }
+  .mobile-menu.open li:nth-child(4) { animation-delay: 0.2s; }
+  .mobile-menu.open li:nth-child(5) { animation-delay: 0.25s; }
+  .mobile-menu.open li:nth-child(6) { animation-delay: 0.3s; }
+  .mobile-menu.open li:nth-child(7) { animation-delay: 0.35s; }
+
+  @keyframes menuFadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(-8px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* ── Language switcher ── */
+  .lang-switcher {
+    position: relative;
+  }
+
+  .lang-code {
+    font-weight: 700;
+    font-size: 0.75rem;
+    min-width: 2ch;
+    color: var(--color-brand);
+  }
+
+  .lang-name {
+    white-space: nowrap;
+    flex: 1;
+  }
+</style>
+
+<script>
+  import { initNav } from '@scripts/nav';
+  initNav();
+</script>

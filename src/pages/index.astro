@@ -1,0 +1,67 @@
+---
+import Layout from '@layouts/Layout.astro';
+import Nav from '@components/Nav.astro';
+import Hero from '@components/Hero.astro';
+import About from '@components/About.astro';
+import Services from '@components/Services.astro';
+import Process from '@components/Process.astro';
+import Technologies from '@components/Technologies.astro';
+import Team from '@components/Team.astro';
+import Testimonials from '@components/Testimonials.astro';
+import Contact from '@components/Contact.astro';
+import Footer from '@components/Footer.astro';
+---
+
+<Layout>
+  <Nav />
+  <main>
+    <Hero />
+    <About />
+    <Services />
+    <Process />
+    <Technologies />
+    <Team />
+    <Testimonials />
+    <Contact />
+  </main>
+  <Footer />
+</Layout>
+
+<script>
+  import { initScrollReveal } from '@scripts/observer';
+  import { initNav } from '@scripts/nav';
+  import { initSmoothScroll } from '@scripts/smooth-scroll';
+  import { initGSAP } from '@scripts/gsap-init';
+  import { initThemeSwitcher } from '@scripts/theme-switcher';
+  import { initI18n } from '@scripts/i18n';
+
+  import { initCounters } from '@scripts/counter';
+
+  initNav();
+  initSmoothScroll();
+  initScrollReveal();
+  initGSAP();
+  initThemeSwitcher();
+  initCounters();
+  initI18n();
+
+  // Lazy-load magnetic hover effect
+  if ('requestIdleCallback' in window) {
+    requestIdleCallback(() => import('@scripts/magnetic-hover').then((m) => m.initMagneticHover()), { timeout: 2000 });
+  } else {
+    setTimeout(() => import('@scripts/magnetic-hover').then((m) => m.initMagneticHover()), 2000);
+  }
+
+  // Logo morph (FYNITI ↔ infinity) — loads eagerly since first cycle is immediate
+  import('@scripts/logo-morph').then((m) => m.initLogoMorph());
+
+  // Logo scramble-reveal on hover
+  import('@scripts/logo-scramble').then((m) => m.initLogoScramble());
+
+  // Lazy-load chatbot at idle time
+  if ('requestIdleCallback' in window) {
+    requestIdleCallback(() => import('@scripts/chatbot').then((m) => m.initChatbot()), { timeout: 3000 });
+  } else {
+    setTimeout(() => import('@scripts/chatbot').then((m) => m.initChatbot()), 3000);
+  }
+</script>

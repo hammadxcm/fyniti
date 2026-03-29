@@ -1,0 +1,130 @@
+---
+import { testimonials } from '@data/site';
+import SectionHeader from '@components/SectionHeader.astro';
+---
+
+<section id="testimonials">
+  <div class="section">
+    <SectionHeader label="What Clients Say" title="Testimonials" />
+
+    <div class="marquee-wrapper reveal">
+      <div class="marquee-track" aria-label="Client testimonials">
+        {/* First set */}
+        {testimonials.map((t) => (
+          <blockquote class="testimonial-card glass glass-shimmer rounded-xl">
+            <p class="testimonial-quote">
+              &ldquo;{t.quote}&rdquo;
+            </p>
+            <div class="testimonial-divider" aria-hidden="true"></div>
+            <footer class="testimonial-footer">
+              <cite class="testimonial-author">{t.author}</cite>
+              <span class="testimonial-role">
+                {t.role}, {t.company}
+              </span>
+            </footer>
+          </blockquote>
+        ))}
+        {/* Duplicate set for seamless loop */}
+        {testimonials.map((t) => (
+          <blockquote class="testimonial-card glass glass-shimmer rounded-xl" aria-hidden="true">
+            <p class="testimonial-quote">
+              &ldquo;{t.quote}&rdquo;
+            </p>
+            <div class="testimonial-divider" aria-hidden="true"></div>
+            <footer class="testimonial-footer">
+              <cite class="testimonial-author">{t.author}</cite>
+              <span class="testimonial-role">
+                {t.role}, {t.company}
+              </span>
+            </footer>
+          </blockquote>
+        ))}
+      </div>
+    </div>
+
+    <!-- Ambient orb -->
+    <div class="ambient-orb" style="bottom: 10%; right: -6%; width: 280px; height: 280px;"></div>
+  </div>
+
+  <!-- Section divider -->
+  <div class="section-divider-line"></div>
+</section>
+
+<style>
+  .marquee-wrapper {
+    overflow: hidden;
+    mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+    -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+  }
+
+  .marquee-track {
+    display: flex;
+    gap: 1.5rem;
+    animation: marquee 40s linear infinite;
+    width: max-content;
+  }
+
+  .marquee-track:hover {
+    animation-play-state: paused;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .marquee-track {
+      animation: none;
+      flex-wrap: wrap;
+      width: auto;
+      justify-content: center;
+    }
+  }
+
+  .testimonial-card {
+    flex-shrink: 0;
+    width: 350px;
+    max-width: 350px;
+    padding: 1.75rem;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid var(--color-border-default);
+    transition: border-color 0.3s ease;
+    margin: 0;
+  }
+
+  .testimonial-card:hover {
+    border-color: var(--color-border-hover);
+  }
+
+  .testimonial-quote {
+    font-style: italic;
+    color: var(--color-text-secondary);
+    font-size: 0.9375rem;
+    line-height: 1.7;
+    margin: 0;
+    flex: 1;
+  }
+
+  .testimonial-divider {
+    width: 2.5rem;
+    height: 2px;
+    background: linear-gradient(90deg, var(--color-brand), var(--color-brand-light));
+    border-radius: 1px;
+    margin: 1.25rem 0;
+  }
+
+  .testimonial-footer {
+    display: flex;
+    flex-direction: column;
+    gap: 0.125rem;
+  }
+
+  .testimonial-author {
+    font-style: normal;
+    font-weight: 600;
+    color: var(--color-text-primary);
+    font-size: 0.9375rem;
+  }
+
+  .testimonial-role {
+    font-size: 0.8125rem;
+    color: var(--color-text-secondary);
+  }
+</style>

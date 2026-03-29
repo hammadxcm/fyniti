@@ -1,0 +1,71 @@
+---
+import '@styles/global.css';
+import '@styles/themes.css';
+import '@styles/chatbot.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = 'FYNITI — IT Solutions & Digital Innovation',
+  description = 'FYNITI delivers innovative IT solutions, software development, and digital experiences that empower businesses to thrive in the digital age.',
+} = Astro.props;
+
+const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
+const ogImage = new URL('/og-image.png', Astro.site);
+---
+
+<!doctype html>
+<html lang="en" data-chat-api="https://portfolio-chat.hammadkhanxcm.workers.dev">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalUrl} />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:site_name" content="FYNITI" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+
+    <!-- Favicon & App Icons -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" href="/favicon.svg" />
+    <meta name="theme-color" content="#0b0f14" />
+
+    <!-- Preload fonts -->
+    <link rel="preload" href="/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin />
+    <link
+      rel="preload"
+      href="/fonts/firacode-latin.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <!-- Prevent flash of wrong theme -->
+    <script is:inline>
+      (function(){var t=localStorage.getItem('fyniti-theme');if(t&&t!=='hacker')document.documentElement.setAttribute('data-theme',t);})();
+    </script>
+  </head>
+  <body>
+    <!-- Skip to content (accessibility) -->
+    <a href="#about" class="skip-link">Skip to content</a>
+    <div id="scroll-progress" aria-hidden="true"></div>
+    <slot />
+  </body>
+</html>

@@ -1,0 +1,155 @@
+---
+import SectionHeader from '@components/SectionHeader.astro';
+
+// All icons now local in /public/icons/animated/
+// 27 from techstack-generator (3D rotating SMIL) + 16 wrapped static (pulse SMIL)
+const techs = [
+  'React', 'TypeScript', 'JavaScript', 'Python', 'Java', 'C++', 'C#', 'Swift',
+  'Redux', 'Sass', 'Django', 'GraphQL', 'REST API', 'Docker', 'Kubernetes',
+  'AWS', 'Nginx', 'MySQL', 'GitHub', 'Jest', 'Webpack', 'ESLint', 'Prettier',
+  'Storybook', 'Gatsby', 'Vue', 'Angular', 'Next.js', 'Node.js', 'Tailwind',
+  'Astro', 'MongoDB', 'PostgreSQL', 'Redis', 'Go', 'Rust', 'Git', 'NestJS',
+  'Ruby', 'PHP', 'Prisma',
+];
+
+// Map display name → filename in /icons/animated/
+const fileMap: Record<string, string> = {
+  'React': 'react', 'TypeScript': 'ts', 'JavaScript': 'js', 'Python': 'python',
+  'Java': 'java', 'C++': 'cpp', 'C#': 'csharp', 'Swift': 'swift',
+  'Redux': 'redux', 'Sass': 'sass', 'Django': 'django', 'GraphQL': 'graphql',
+  'REST API': 'restapi', 'Docker': 'docker', 'Kubernetes': 'kubernetes',
+  'AWS': 'aws', 'Nginx': 'nginx', 'MySQL': 'mysql', 'GitHub': 'github',
+  'Jest': 'jest', 'Webpack': 'webpack', 'ESLint': 'eslint', 'Prettier': 'prettier',
+  'Storybook': 'storybook', 'Gatsby': 'gatsby', 'Vue': 'vue', 'Angular': 'angular',
+  'Next.js': 'nextjs', 'Node.js': 'nodejs', 'Tailwind': 'tailwind', 'Astro': 'astro',
+  'MongoDB': 'mongodb', 'PostgreSQL': 'postgresql', 'Redis': 'redis', 'Go': 'go',
+  'Rust': 'rust', 'Git': 'git', 'NestJS': 'nestjs', 'Ruby': 'ruby', 'PHP': 'php',
+  'Prisma': 'prisma',
+};
+---
+
+<section id="technologies" style="position: relative; overflow: hidden;">
+  <div class="ambient-orb" style="width: 350px; height: 350px; background: radial-gradient(circle, rgba(var(--glow-rgb, 0,168,168), 0.06) 0%, transparent 70%); top: -5%; right: -8%;" aria-hidden="true"></div>
+
+  <div class="section">
+    <SectionHeader label="Our Stack" title="Technologies We Use" />
+    <p class="text-center text-text-secondary text-base md:text-lg max-w-2xl mx-auto mb-2 px-6">
+      Delivering excellence across <span class="text-brand font-semibold">40+ technologies</span> — from modern frontends to scalable cloud infrastructure.
+    </p>
+  </div>
+
+  <div class="marquee">
+    <div class="marquee-track">
+      {[...techs, ...techs].map((name) => (
+        <span class="marquee-item" data-name={name}>
+          <img
+            class="marquee-icon"
+            src={`/icons/animated/${fileMap[name] || name.toLowerCase()}.svg`}
+            alt={name}
+            width="56"
+            height="56"
+            loading="lazy"
+            decoding="async"
+          />
+          <span class="marquee-tooltip">{name}</span>
+        </span>
+      ))}
+    </div>
+  </div>
+
+  <div class="section-divider-line"></div>
+</section>
+
+<style>
+  /* Keyframes MUST be in the same scoped style block for Astro */
+  @keyframes marquee-slide {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  .marquee {
+    overflow: hidden;
+    padding: 2.5rem 0;
+    border-top: 1px solid var(--color-border-default);
+    border-bottom: 1px solid var(--color-border-default);
+    mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+    -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+  }
+
+  .marquee-track {
+    display: flex;
+    align-items: center;
+    gap: 3rem;
+    width: max-content;
+    animation: marquee-slide 60s linear infinite;
+    will-change: transform;
+  }
+
+  .marquee-track:hover {
+    animation-play-state: paused;
+  }
+
+  .marquee-item {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    cursor: default;
+  }
+
+  .marquee-icon {
+    width: 56px;
+    height: 56px;
+    object-fit: contain;
+    opacity: 0.85;
+    transition: filter 0.35s ease, opacity 0.35s ease, transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .marquee-item:hover .marquee-icon {
+    opacity: 1;
+    filter: drop-shadow(0 0 10px color-mix(in srgb, var(--color-brand) 35%, transparent));
+    transform: scale(1.2) translateY(-4px);
+  }
+
+  /* Tooltip */
+  .marquee-tooltip {
+    position: absolute;
+    bottom: -1.75rem;
+    left: 50%;
+    transform: translateX(-50%) translateY(4px);
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    font-weight: 500;
+    color: var(--color-brand);
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s ease, transform 0.25s ease;
+    text-shadow: 0 0 8px color-mix(in srgb, var(--color-brand) 20%, transparent);
+  }
+
+  .marquee-item:hover .marquee-tooltip {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+
+  @media (max-width: 768px) {
+    .marquee { padding: 1.75rem 0; }
+    .marquee-track { gap: 2rem; animation-duration: 45s; }
+    .marquee-icon { width: 40px; height: 40px; }
+    .marquee-tooltip { font-size: 0.6rem; bottom: -1.25rem; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .marquee-track {
+      animation: none;
+      flex-wrap: wrap;
+      justify-content: center;
+      width: auto;
+      gap: 2rem;
+      padding: 0 1.5rem;
+    }
+    .marquee-icon { opacity: 0.7; }
+  }
+</style>

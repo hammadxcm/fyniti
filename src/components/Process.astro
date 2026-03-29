@@ -1,0 +1,237 @@
+---
+import { processSteps } from '@data/site';
+import SectionHeader from '@components/SectionHeader.astro';
+import { Search, ClipboardList, Code, CheckCircle, Rocket } from '@lucide/astro';
+
+const stepIcons = [Search, ClipboardList, Code, CheckCircle, Rocket];
+---
+
+<section id="process" class="section-surface" style="position: relative; overflow: hidden;">
+  <div class="section">
+    <SectionHeader label="How We Work" title="Our Process" />
+
+    <div class="process-grid" id="process-grid">
+      {processSteps.map((step, i) => {
+        const StepIcon = stepIcons[i];
+        return (
+          <div class="ps" style={`--i: ${i}`}>
+            <div class="ps-node">
+              <span class="ps-num">{step.number}</span>
+            </div>
+            <div class="ps-connector" aria-hidden="true"></div>
+            <div class="ps-card glass rounded-xl">
+              <div class="ps-icon">
+                {StepIcon && <StepIcon size={22} strokeWidth={1.5} />}
+              </div>
+              <h3 class="ps-title">{step.title}</h3>
+              <p class="ps-desc">{step.description}</p>
+            </div>
+          </div>
+        );
+      })}
+    </div>
+  </div>
+</section>
+
+<style>
+  /* ── Grid ── */
+  .process-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  @media (min-width: 768px) {
+    .process-grid {
+      grid-template-columns: repeat(5, 1fr);
+      gap: 0.75rem;
+    }
+  }
+
+  /* ── Step ── */
+  .ps {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  @media (min-width: 768px) {
+    .ps {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 0;
+    }
+  }
+
+  /* ── Node (number circle) ── */
+  .ps-node {
+    width: 40px;
+    height: 40px;
+    min-width: 40px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--color-brand), var(--color-brand-light));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    z-index: 2;
+    box-shadow: 0 0 14px color-mix(in srgb, var(--color-brand) 30%, transparent);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    margin-top: 0.25rem;
+  }
+
+  .ps:hover .ps-node {
+    transform: scale(1.15);
+    box-shadow: 0 0 22px color-mix(in srgb, var(--color-brand) 50%, transparent);
+  }
+
+  .ps-num {
+    font-family: var(--font-mono, monospace);
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--color-bg-base);
+    line-height: 1;
+  }
+
+  @media (min-width: 768px) {
+    .ps-node {
+      margin-top: 0;
+      margin-bottom: 0;
+    }
+  }
+
+  /* ── Connector line between node and card (desktop: horizontal, mobile: none) ── */
+  .ps-connector {
+    display: none;
+  }
+
+  @media (min-width: 768px) {
+    .ps-connector {
+      display: block;
+      width: 2px;
+      height: 20px;
+      background: linear-gradient(to bottom, var(--color-brand), color-mix(in srgb, var(--color-brand) 15%, transparent));
+      margin: 0 auto;
+      border-radius: 2px;
+    }
+  }
+
+  /* ── Horizontal line through nodes (desktop only) ── */
+  @media (min-width: 768px) {
+    .process-grid {
+      position: relative;
+    }
+
+    .process-grid::before {
+      content: '';
+      position: absolute;
+      top: 20px;
+      left: calc(10% + 20px);
+      right: calc(10% + 20px);
+      height: 2px;
+      background: linear-gradient(
+        90deg,
+        var(--color-brand),
+        var(--color-brand-light),
+        var(--color-brand-mint),
+        var(--color-brand-light),
+        var(--color-brand)
+      );
+      opacity: 0.3;
+      z-index: 1;
+      border-radius: 2px;
+    }
+  }
+
+  /* ── Card ── */
+  .ps-card {
+    flex: 1;
+    padding: 1.25rem;
+    border: 1px solid var(--color-border-default);
+    transition:
+      transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+      border-color 0.3s ease,
+      box-shadow 0.4s ease;
+  }
+
+  @media (min-width: 768px) {
+    .ps-card {
+      padding: 1.25rem 1rem;
+      width: 100%;
+    }
+  }
+
+  .ps:hover .ps-card {
+    transform: translateY(-4px);
+    border-color: var(--color-border-hover);
+    box-shadow:
+      0 8px 24px -8px color-mix(in srgb, var(--color-brand) 16%, transparent),
+      0 0 32px -10px color-mix(in srgb, var(--color-brand) 8%, transparent);
+  }
+
+  /* ── Icon ── */
+  .ps-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: var(--radius-md, 12px);
+    background: color-mix(in srgb, var(--color-brand) 8%, transparent);
+    border: 1px solid color-mix(in srgb, var(--color-brand) 12%, transparent);
+    color: var(--color-brand);
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  @media (min-width: 768px) {
+    .ps-icon {
+      margin: 0 auto 0.6rem;
+    }
+  }
+
+  .ps:hover .ps-icon {
+    background: color-mix(in srgb, var(--color-brand) 15%, transparent);
+    transform: scale(1.1);
+    box-shadow: 0 0 12px -2px color-mix(in srgb, var(--color-brand) 20%, transparent);
+  }
+
+  /* ── Title ── */
+  .ps-title {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--color-text-primary);
+    margin: 0.5rem 0 0.35rem;
+    transition: color 0.3s ease;
+  }
+
+  @media (min-width: 768px) {
+    .ps-title {
+      margin: 0 0 0.35rem;
+    }
+  }
+
+  .ps:hover .ps-title {
+    color: var(--color-brand);
+  }
+
+  /* ── Description ── */
+  .ps-desc {
+    font-size: 0.75rem;
+    line-height: 1.6;
+    color: var(--color-text-secondary);
+    margin: 0;
+  }
+
+  /* ── Stagger entrance ── */
+  .ps {
+    animation: psEnter 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+    animation-delay: calc(var(--i) * 0.1s);
+  }
+
+  @keyframes psEnter {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+</style>

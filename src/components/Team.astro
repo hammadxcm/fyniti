@@ -1,0 +1,57 @@
+---
+import { team } from '@data/site';
+import SectionHeader from '@components/SectionHeader.astro';
+import TeamCard from '@components/TeamCard.astro';
+---
+
+<section id="team" class="bg-bg-surface section-surface">
+  <div class="section">
+    <SectionHeader label="Leadership" title="Meet The Team" />
+
+    <div class="team-container reveal">
+      {team.map((member) => (
+        <TeamCard member={member} />
+      ))}
+    </div>
+
+    <div class="ambient-orb" style="top: 30%; left: -8%; width: 250px; height: 250px;"></div>
+  </div>
+
+  <div class="section-divider-line"></div>
+</section>
+
+<style>
+  .team-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+    max-width: 56rem;
+    margin: 0 auto;
+    position: relative;
+  }
+
+  .team-container::before {
+    content: '{ }  < / >  { }  < / >  { }';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: monospace;
+    font-size: 3rem;
+    letter-spacing: 0.5rem;
+    color: var(--color-brand, #00A8A8);
+    opacity: 0.03;
+    white-space: nowrap;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  @media (min-width: 768px) {
+    .team-container {
+      flex-direction: row;
+      gap: 2.5rem;
+    }
+  }
+</style>

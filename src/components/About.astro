@@ -1,0 +1,219 @@
+---
+import { stats } from '@data/site';
+import SectionHeader from '@components/SectionHeader.astro';
+---
+
+<section id="about" style="position: relative; overflow: hidden; scroll-margin-top: 4.5rem; background-color: var(--color-bg-surface);">
+  <div class="ambient-orb" style="width:400px;height:400px;background:radial-gradient(circle,rgba(0,168,168,0.06) 0%,transparent 70%);top:-10%;right:-10%;" aria-hidden="true"></div>
+  <div class="section" style="padding-top: 0.75rem;">
+    <SectionHeader label="About Us" title="Who We Are" />
+
+    <div class="about-grid">
+      <!-- Left column: content -->
+      <div class="reveal-left">
+        <h3 class="about-heading">
+          Building the Future of <span class="gradient-text">Digital Solutions</span>
+        </h3>
+
+        <p class="about-text">
+          We aim to become a leading provider of innovative IT solutions and services, delivering
+          high-quality software, application development, and digital experiences that empower
+          businesses to thrive in the digital age.
+        </p>
+
+        <p class="about-text">
+          Our mission is to deliver comprehensive IT solutions tailored to the specific needs
+          of our clients, empowering them to achieve their business objectives through innovative
+          technology, expert guidance, and exceptional customer support.
+        </p>
+
+        <!-- Values badges -->
+        <div class="values-row">
+          <span class="value-badge">Innovation</span>
+          <span class="value-badge">Quality</span>
+          <span class="value-badge">Global Reach</span>
+        </div>
+      </div>
+
+      <!-- Right column: vertical stat rows -->
+      <div class="reveal-right">
+        <div class="stat-stack">
+          {stats.map((stat, i) => (
+            <div class="stat-row" style={`--i: ${i}`}>
+              <div class="stat-top">
+                <span
+                  class="stat-num gradient-text"
+                  data-counter
+                  data-value={stat.value}
+                  data-suffix={stat.suffix}
+                >
+                  {'display' in stat ? stat.display : `0${stat.suffix}`}
+                </span>
+                <span class="stat-label">{stat.label}</span>
+              </div>
+              <div class="stat-bar">
+                <div class="stat-bar-fill" style={`--bar: ${stat.bar}%`}></div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="section-divider-line"></div>
+</section>
+
+<style>
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+    align-items: start;
+  }
+
+  @media (min-width: 768px) {
+    .about-grid {
+      grid-template-columns: 1fr 1fr;
+      gap: 3.5rem;
+    }
+  }
+
+  .about-heading {
+    font-size: clamp(1.5rem, 3.5vw, 2rem);
+    font-weight: 700;
+    color: var(--color-text-primary);
+    line-height: 1.3;
+    margin-bottom: 1.25rem;
+  }
+
+  .about-text {
+    color: var(--color-text-secondary);
+    font-size: 0.95rem;
+    line-height: 1.7;
+    margin-bottom: 1rem;
+  }
+
+  .about-text:last-of-type {
+    margin-bottom: 1.5rem;
+  }
+
+  /* ── Values badges ── */
+  .values-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+  }
+
+  .value-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.3rem 0.75rem;
+    font-family: var(--font-mono, monospace);
+    font-size: 0.65rem;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--color-brand);
+    background: color-mix(in srgb, var(--color-brand) 6%, transparent);
+    border: 1px solid color-mix(in srgb, var(--color-brand) 15%, transparent);
+    border-radius: 100px;
+    transition: all 0.25s ease;
+  }
+
+  .value-badge:hover {
+    background: color-mix(in srgb, var(--color-brand) 12%, transparent);
+    border-color: var(--color-brand);
+    box-shadow: 0 0 10px color-mix(in srgb, var(--color-brand) 15%, transparent);
+  }
+
+  /* ── Stat stack ── */
+  .stat-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  .stat-row {
+    padding: 1rem 1.25rem;
+    border-radius: var(--radius-md, 12px);
+    background: color-mix(in srgb, var(--color-brand) 3%, transparent);
+    border: 1px solid color-mix(in srgb, var(--color-brand) 8%, transparent);
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    animation: statSlideIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+    animation-delay: calc(var(--i) * 0.12s);
+  }
+
+  .stat-row:hover {
+    background: color-mix(in srgb, var(--color-brand) 6%, transparent);
+    border-color: color-mix(in srgb, var(--color-brand) 18%, transparent);
+    transform: translateX(4px);
+  }
+
+  @keyframes statSlideIn {
+    from { opacity: 0; transform: translateX(20px); }
+    to { opacity: 1; transform: translateX(0); }
+  }
+
+  .stat-top {
+    display: flex;
+    align-items: baseline;
+    gap: 0.75rem;
+    margin-bottom: 0.6rem;
+  }
+
+  .stat-num {
+    font-family: var(--font-mono, monospace);
+    font-size: clamp(2rem, 4vw, 2.75rem);
+    font-weight: 700;
+    line-height: 1;
+    min-width: 3.5ch;
+  }
+
+  .stat-label {
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--color-text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+
+  /* ── Animated accent bar ── */
+  .stat-bar {
+    height: 3px;
+    border-radius: 3px;
+    background: color-mix(in srgb, var(--color-brand) 10%, transparent);
+    overflow: hidden;
+  }
+
+  .stat-bar-fill {
+    height: 100%;
+    width: 0;
+    border-radius: 3px;
+    background: linear-gradient(90deg, var(--color-brand), var(--color-brand-light), var(--color-brand-mint));
+    transition: width 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+    transition-delay: calc(var(--i) * 0.12s + 0.3s);
+  }
+
+  .stat-row.visible .stat-bar-fill {
+    width: var(--bar);
+  }
+</style>
+
+<script>
+  // Trigger bar fill animation when stat rows enter viewport
+  const rows = document.querySelectorAll('.stat-row');
+  const obs = new IntersectionObserver(
+    (entries) => {
+      for (const e of entries) {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          obs.unobserve(e.target);
+        }
+      }
+    },
+    { threshold: 0.2 },
+  );
+  for (const r of rows) obs.observe(r);
+</script>

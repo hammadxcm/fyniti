@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <rect width="64" height="64" rx="12" fill="#0B0F14"/>
+  <!-- Pixel-art F letter from FYNITI logo -->
+  <g fill="#00A8A8">
+    <rect x="14" y="16" width="36" height="6"/>
+    <rect x="14" y="16" width="8" height="32"/>
+    <rect x="14" y="30" width="26" height="6"/>
+  </g>
+  <!-- Accent glow -->
+  <rect x="14" y="16" width="36" height="6" fill="url(#fg)" opacity="0.6"/>
+  <defs>
+    <linearGradient id="fg" x1="0" y1="0" x2="64" y2="64">
+      <stop offset="0%" stop-color="#00A8A8"/>
+      <stop offset="100%" stop-color="#A9FEF7"/>
+    </linearGradient>
+  </defs>
+</svg>
