@@ -4,9 +4,9 @@ export const siteConfig = {
   description:
     'FYNITI delivers innovative IT solutions, software development, and digital experiences that empower businesses to thrive in the digital age.',
   url: 'https://fyniti.co.uk',
-  email: 'info@fyniti.co.uk',
+  email: 'contact@fyniti.co.uk',
   phone: '+44 755 1045042',
-  location: 'United Kingdom',
+  location: '762 Unit 1 Greelane, Green Lane, Dagenham, England, RM8 1YT',
   formspreeId: '', // Legacy — unused
   web3formsKey: '', // Set via PUBLIC_WEB3FORMS_KEY env var
   contactEmail: 'contact@fyniti.co.uk',
@@ -196,7 +196,7 @@ export const team: TeamMember[] = [
     email: 'zashasim892@gmail.com',
     links: [
       { label: 'Email', url: 'mailto:zashasim892@gmail.com' },
-      { label: 'LinkedIn', url: 'https://linkedin.com/in/zeeshanasim' },
+      { label: 'Instagram', url: 'https://www.instagram.com/zee.axb/' },
     ],
   },
   {
