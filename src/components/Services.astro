@@ -1,40 +1,18 @@
 ---
 import { services } from '@data/site';
 import SectionHeader from '@components/SectionHeader.astro';
-import {
-  Lightbulb,
-  Cog,
-  Smartphone,
-  Palette,
-  ShoppingCart,
-  SearchCheck,
-  Megaphone,
-  Handshake,
-  TrendingUp,
-} from '@lucide/astro';
 
-const iconMap: Record<string, typeof Lightbulb> = {
-  'IT Solutions & Consulting': Lightbulb,
-  'Software Development': Cog,
-  'Web & Mobile Apps': Smartphone,
-  'Web Design & UI/UX': Palette,
-  'E-Commerce Solutions': ShoppingCart,
-  'Testing & QA': SearchCheck,
-  'Social Media & Video': Megaphone,
-  'BPO Services': Handshake,
-  'SEO & Digital Marketing': TrendingUp,
-};
-
-const animMap: Record<string, string> = {
-  'IT Solutions & Consulting': 'icon-pulse',
-  'Software Development': 'icon-spin',
-  'Web & Mobile Apps': 'icon-bounce',
-  'Web Design & UI/UX': 'icon-wiggle',
-  'E-Commerce Solutions': 'icon-shake',
-  'Testing & QA': 'icon-check',
-  'Social Media & Video': 'icon-ring',
-  'BPO Services': 'icon-wave',
-  'SEO & Digital Marketing': 'icon-rise',
+// Animated SVG icons from line-md (MIT, CSS-animated)
+const iconMap: Record<string, string> = {
+  'IT Solutions & Consulting': '/icons/animated-ui/lightbulb.svg',
+  'Software Development': '/icons/animated-ui/cog-loop.svg',
+  'Web & Mobile Apps': '/icons/animated-ui/phone.svg',
+  'Web Design & UI/UX': '/icons/animated-ui/paint-drop.svg',
+  'E-Commerce Solutions': '/icons/animated-ui/briefcase.svg',
+  'Testing & QA': '/icons/animated-ui/clipboard-check.svg',
+  'Social Media & Video': '/icons/animated-ui/star-pulsating.svg',
+  'BPO Services': '/icons/animated-ui/edit.svg',
+  'SEO & Digital Marketing': '/icons/animated-ui/search.svg',
 };
 ---
 
@@ -48,8 +26,7 @@ const animMap: Record<string, string> = {
 
     <div class="bento-grid" id="services-grid">
       {services.map((service, index) => {
-        const IconComponent = iconMap[service.title];
-        const animClass = animMap[service.title] ?? 'icon-pulse';
+        const iconSrc = iconMap[service.title];
 
         return (
           <div
@@ -63,8 +40,8 @@ const animMap: Record<string, string> = {
 
             <div class="service-card__inner">
               <div class="service-card__header">
-                <div class:list={['service-card__icon-wrap', animClass]}>
-                  {IconComponent && <IconComponent size={32} strokeWidth={1.5} class="service-card__lucide" />}
+                <div class="service-card__icon-wrap">
+                  {iconSrc && <img src={iconSrc} width="28" height="28" alt="" class="service-card__icon-img" loading="lazy" />}
                 </div>
                 {service.featured && <span class="service-card__badge">Featured</span>}
               </div>
@@ -221,109 +198,21 @@ const animMap: Record<string, string> = {
     transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
+  .service-card__icon-img {
+    width: 28px;
+    height: 28px;
+    filter: brightness(0) saturate(100%) invert(45%) sepia(90%) saturate(500%) hue-rotate(140deg);
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .service-card:hover .service-card__icon-img {
+    transform: scale(1.15);
+  }
+
   .service-card:hover .service-card__icon-wrap {
     background: color-mix(in srgb, var(--color-brand) 15%, transparent);
     border-color: color-mix(in srgb, var(--color-brand) 25%, transparent);
     box-shadow: 0 0 20px -4px color-mix(in srgb, var(--color-brand) 25%, transparent);
-  }
-
-  :global(.service-card__lucide) {
-    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-  }
-
-  /* ── Icon hover animations (unique per service) ── */
-
-  /* Pulse — gentle scale throb */
-  .service-card:hover .icon-pulse :global(.service-card__lucide) {
-    animation: iconPulse 0.6s ease-in-out;
-  }
-  @keyframes iconPulse {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.2); }
-  }
-
-  /* Spin — gear rotation */
-  .service-card:hover .icon-spin :global(.service-card__lucide) {
-    animation: iconSpin 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-  }
-  @keyframes iconSpin {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(180deg); }
-  }
-
-  /* Bounce — mobile phone bounce */
-  .service-card:hover .icon-bounce :global(.service-card__lucide) {
-    animation: iconBounce 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
-  }
-  @keyframes iconBounce {
-    0%, 100% { transform: translateY(0); }
-    40% { transform: translateY(-8px); }
-    60% { transform: translateY(-4px); }
-  }
-
-  /* Wiggle — palette wiggle */
-  .service-card:hover .icon-wiggle :global(.service-card__lucide) {
-    animation: iconWiggle 0.5s ease-in-out;
-  }
-  @keyframes iconWiggle {
-    0%, 100% { transform: rotate(0deg); }
-    25% { transform: rotate(-12deg); }
-    75% { transform: rotate(12deg); }
-  }
-
-  /* Shake — cart shake */
-  .service-card:hover .icon-shake :global(.service-card__lucide) {
-    animation: iconShake 0.4s ease-in-out;
-  }
-  @keyframes iconShake {
-    0%, 100% { transform: translateX(0); }
-    25% { transform: translateX(-4px); }
-    50% { transform: translateX(4px); }
-    75% { transform: translateX(-2px); }
-  }
-
-  /* Check — scale pop */
-  .service-card:hover .icon-check :global(.service-card__lucide) {
-    animation: iconCheck 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
-  }
-  @keyframes iconCheck {
-    0% { transform: scale(0.8); opacity: 0.5; }
-    50% { transform: scale(1.25); }
-    100% { transform: scale(1); opacity: 1; }
-  }
-
-  /* Ring — megaphone ring */
-  .service-card:hover .icon-ring :global(.service-card__lucide) {
-    animation: iconRing 0.6s ease-in-out;
-  }
-  @keyframes iconRing {
-    0%, 100% { transform: rotate(0deg); }
-    10% { transform: rotate(15deg); }
-    20% { transform: rotate(-10deg); }
-    30% { transform: rotate(10deg); }
-    40% { transform: rotate(-5deg); }
-    50% { transform: rotate(5deg); }
-  }
-
-  /* Wave — handshake wave */
-  .service-card:hover .icon-wave :global(.service-card__lucide) {
-    animation: iconWave 0.6s ease-in-out;
-  }
-  @keyframes iconWave {
-    0%, 100% { transform: rotate(0deg); }
-    20% { transform: rotate(20deg); }
-    40% { transform: rotate(-15deg); }
-    60% { transform: rotate(10deg); }
-    80% { transform: rotate(-5deg); }
-  }
-
-  /* Rise — trending up */
-  .service-card:hover .icon-rise :global(.service-card__lucide) {
-    animation: iconRise 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-  }
-  @keyframes iconRise {
-    0% { transform: translateY(4px) scale(0.95); opacity: 0.6; }
-    100% { transform: translateY(-4px) scale(1.05); opacity: 1; }
   }
 
   .service-card__badge {

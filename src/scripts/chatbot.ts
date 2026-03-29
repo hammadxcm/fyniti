@@ -17,7 +17,7 @@ function createUI(): void {
   widgetEl.id = 'chatbotTrigger';
   widgetEl.setAttribute('aria-label', 'Open chat');
   widgetEl.innerHTML =
-    '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>';
+    '<img src="/icons/animated-ui/chat-bubble.svg" width="24" height="24" alt="" style="filter: brightness(0) invert(1);" />';
   document.body.appendChild(widgetEl);
 
   panelEl = document.createElement('div');
