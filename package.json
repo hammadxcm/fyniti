@@ -17,7 +17,7 @@
     "format": "biome check --write src/"
   },
   "dependencies": {
-    "@astrojs/react": "^4.2.1",
+    "@astrojs/react": "^5.0.2",
     "@astrojs/sitemap": "^3.3.1",
     "@lucide/astro": "^1.7.0",
     "@tailwindcss/vite": "^4.2.2",
