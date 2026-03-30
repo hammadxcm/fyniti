@@ -11,7 +11,7 @@
       },
       "suspicious": {
         "noExplicitAny": "error",
-        "noArrayIndexKey": "off"
+        "noArrayIndexKey": "warn"
       },
       "correctness": {
         "noUnusedVariables": "error",

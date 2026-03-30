@@ -7,7 +7,6 @@ export const siteConfig = {
   email: 'contact@fyniti.co.uk',
   phone: '+44 755 1045042',
   location: '762 Unit 1 Greelane, Green Lane, Dagenham, England, RM8 1YT',
-  formspreeId: '', // Legacy — unused
   web3formsKey: '', // Set via PUBLIC_WEB3FORMS_KEY env var
   contactEmail: 'contact@fyniti.co.uk',
 } as const;

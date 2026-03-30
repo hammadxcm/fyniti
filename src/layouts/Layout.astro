@@ -42,6 +42,56 @@ const ogImage = new URL('/og-image.png', Astro.site);
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImage} />
 
+    <!-- Structured Data (Schema.org) -->
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Organization",
+          "name": "FYNITI",
+          "url": "https://fyniti.co.uk",
+          "logo": "https://fyniti.co.uk/favicon.svg",
+          "email": "contact@fyniti.co.uk",
+          "telephone": "+447551045042",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "762 Unit 1 Greelane, Green Lane",
+            "addressLocality": "Dagenham",
+            "addressRegion": "England",
+            "postalCode": "RM8 1YT",
+            "addressCountry": "GB"
+          },
+          "sameAs": [
+            "https://www.linkedin.com/company/105102524/",
+            "https://github.com/hammadxcm",
+            "https://x.com/fyniti_uk"
+          ]
+        },
+        {
+          "@type": "WebSite",
+          "name": "FYNITI",
+          "url": "https://fyniti.co.uk"
+        },
+        {
+          "@type": "LocalBusiness",
+          "name": "FYNITI",
+          "description": "IT Solutions & Digital Innovation",
+          "url": "https://fyniti.co.uk",
+          "telephone": "+447551045042",
+          "email": "contact@fyniti.co.uk",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "762 Unit 1 Greelane, Green Lane",
+            "addressLocality": "Dagenham",
+            "addressRegion": "England",
+            "postalCode": "RM8 1YT",
+            "addressCountry": "GB"
+          },
+          "priceRange": "$$"
+        }
+      ]
+    })} />
+
     <!-- Favicon & App Icons -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
