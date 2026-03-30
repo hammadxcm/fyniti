@@ -94,7 +94,7 @@ jobs:
 
           color() { if [ "$1" -ge 90 ]; then echo "brightgreen"; elif [ "$1" -ge 50 ]; then echo "orange"; else echo "red"; fi; }
 
-          GIST_ID="03c7e6932b267109a1e1ab5664ca18f3"
+          GIST_ID="661eeba9ffeb25c9d5e952d83f6d6879"
 
           update_badge() {
             local file="$1" label="$2" score="$3"
@@ -103,10 +103,10 @@ jobs:
               -d "{\"files\":{\"$file\":{\"content\":\"{\\\"schemaVersion\\\":1,\\\"label\\\":\\\"$label\\\",\\\"message\\\":\\\"$score\\\",\\\"color\\\":\\\"$(color $score)\\\"}\"}}}" > /dev/null
           }
 
-          update_badge "lighthouse-performance.json" "Performance" "$PERF"
-          update_badge "lighthouse-accessibility.json" "Accessibility" "$A11Y"
-          update_badge "lighthouse-best-practices.json" "Best Practices" "$BP"
-          update_badge "lighthouse-seo.json" "SEO" "$SEO"
+          update_badge "lh-perf.json" "Performance" "$PERF"
+          update_badge "lh-a11y.json" "Accessibility" "$A11Y"
+          update_badge "lh-bp.json" "Best Practices" "$BP"
+          update_badge "lh-seo.json" "SEO" "$SEO"
 
           echo "### Lighthouse Scores" >> $GITHUB_STEP_SUMMARY
           echo "| Performance | Accessibility | Best Practices | SEO |" >> $GITHUB_STEP_SUMMARY
