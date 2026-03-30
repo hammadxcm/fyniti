@@ -6,7 +6,10 @@ import { defineConfig } from 'astro/config';
 export default defineConfig({
   site: 'https://fyniti.co.uk',
   compressHTML: true,
-  build: { inlineStylesheets: 'auto' },
+  build: {
+    inlineStylesheets: 'auto',
+    format: 'file',
+  },
   integrations: [react(), sitemap()],
   vite: {
     plugins: [tailwindcss()],

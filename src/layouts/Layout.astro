@@ -18,11 +18,20 @@ const ogImage = new URL('/og-image.png', Astro.site);
 ---
 
 <!doctype html>
-<html lang="en" data-chat-api="https://portfolio-chat.hammadkhanxcm.workers.dev">
+<html lang="en" data-chat-api={import.meta.env.PUBLIC_CHAT_API || 'https://portfolio-chat.hammadkhanxcm.workers.dev'}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content={Astro.generator} />
+
+    <!-- Security: CSP via meta (GitHub Pages doesn't support response headers) -->
+    <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+    <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin" />
+    <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=()" />
+
+    <!-- Preconnect to external domains -->
+    <link rel="dns-prefetch" href="https://api.web3forms.com" />
+    <link rel="dns-prefetch" href="https://gist.githubusercontent.com" />
 
     <title>{title}</title>
     <meta name="description" content={description} />
