@@ -82,61 +82,33 @@ jobs:
           uploadArtifacts: true
           temporaryPublicStorage: true
 
-      - name: Update Lighthouse badges
-        uses: schneegans/dynamic-badges-action@v1.7.0
-        with:
-          auth: ${{ secrets.GIST_TOKEN }}
-          gistID: 03c7e6932b267109a1e1ab5664ca18f3
-          filename: lighthouse-performance.json
-          label: Performance
-          message: ${{ fromJSON(steps.lighthouse.outputs.manifest)[0].summary.performance >= 0.9 && '🟢' || fromJSON(steps.lighthouse.outputs.manifest)[0].summary.performance >= 0.5 && '🟠' || '🔴' }} ${{ format('{0}', fromJSON(steps.lighthouse.outputs.manifest)[0].summary.performance * 100) }}
-          valColorRange: ${{ fromJSON(steps.lighthouse.outputs.manifest)[0].summary.performance }}
-          maxColorRange: 1
-          minColorRange: 0
-
-      - name: Update Accessibility badge
-        uses: schneegans/dynamic-badges-action@v1.7.0
-        with:
-          auth: ${{ secrets.GIST_TOKEN }}
-          gistID: 03c7e6932b267109a1e1ab5664ca18f3
-          filename: lighthouse-accessibility.json
-          label: Accessibility
-          message: ${{ format('{0}', fromJSON(steps.lighthouse.outputs.manifest)[0].summary.accessibility * 100) }}
-          valColorRange: ${{ fromJSON(steps.lighthouse.outputs.manifest)[0].summary.accessibility }}
-          maxColorRange: 1
-          minColorRange: 0
-
-      - name: Update Best Practices badge
-        uses: schneegans/dynamic-badges-action@v1.7.0
-        with:
-          auth: ${{ secrets.GIST_TOKEN }}
-          gistID: 03c7e6932b267109a1e1ab5664ca18f3
-          filename: lighthouse-best-practices.json
-          label: Best Practices
-          message: ${{ format('{0}', fromJSON(steps.lighthouse.outputs.manifest)[0].summary.best-practices * 100) }}
-          valColorRange: ${{ fromJSON(steps.lighthouse.outputs.manifest)[0].summary.best-practices }}
-          maxColorRange: 1
-          minColorRange: 0
-
-      - name: Update SEO badge
-        uses: schneegans/dynamic-badges-action@v1.7.0
-        with:
-          auth: ${{ secrets.GIST_TOKEN }}
-          gistID: 03c7e6932b267109a1e1ab5664ca18f3
-          filename: lighthouse-seo.json
-          label: SEO
-          message: ${{ format('{0}', fromJSON(steps.lighthouse.outputs.manifest)[0].summary.seo * 100) }}
-          valColorRange: ${{ fromJSON(steps.lighthouse.outputs.manifest)[0].summary.seo }}
-          maxColorRange: 1
-          minColorRange: 0
-
-      - name: Summary
+      - name: Update badges
+        env:
+          GIST_TOKEN: ${{ secrets.GIST_TOKEN }}
+          MANIFEST: ${{ steps.lighthouse.outputs.manifest }}
         run: |
-          echo "### 🏠 Lighthouse Scores" >> $GITHUB_STEP_SUMMARY
-          echo "" >> $GITHUB_STEP_SUMMARY
-          echo "| Category | Score |" >> $GITHUB_STEP_SUMMARY
-          echo "|----------|-------|" >> $GITHUB_STEP_SUMMARY
-          echo "| Performance | $(echo '${{ steps.lighthouse.outputs.manifest }}' | jq '.[0].summary.performance * 100 | round') |" >> $GITHUB_STEP_SUMMARY
-          echo "| Accessibility | $(echo '${{ steps.lighthouse.outputs.manifest }}' | jq '.[0].summary.accessibility * 100 | round') |" >> $GITHUB_STEP_SUMMARY
-          echo "| Best Practices | $(echo '${{ steps.lighthouse.outputs.manifest }}' | jq '.[0].summary."best-practices" * 100 | round') |" >> $GITHUB_STEP_SUMMARY
-          echo "| SEO | $(echo '${{ steps.lighthouse.outputs.manifest }}' | jq '.[0].summary.seo * 100 | round') |" >> $GITHUB_STEP_SUMMARY
+          PERF=$(echo "$MANIFEST" | jq '.[0].summary.performance * 100 | round')
+          A11Y=$(echo "$MANIFEST" | jq '.[0].summary.accessibility * 100 | round')
+          BP=$(echo "$MANIFEST" | jq '.[0].summary."best-practices" * 100 | round')
+          SEO=$(echo "$MANIFEST" | jq '.[0].summary.seo * 100 | round')
+
+          color() { if [ "$1" -ge 90 ]; then echo "brightgreen"; elif [ "$1" -ge 50 ]; then echo "orange"; else echo "red"; fi; }
+
+          GIST_ID="03c7e6932b267109a1e1ab5664ca18f3"
+
+          update_badge() {
+            local file="$1" label="$2" score="$3"
+            curl -s -X PATCH "https://api.github.com/gists/$GIST_ID" \
+              -H "Authorization: token $GIST_TOKEN" \
+              -d "{\"files\":{\"$file\":{\"content\":\"{\\\"schemaVersion\\\":1,\\\"label\\\":\\\"$label\\\",\\\"message\\\":\\\"$score\\\",\\\"color\\\":\\\"$(color $score)\\\"}\"}}}" > /dev/null
+          }
+
+          update_badge "lighthouse-performance.json" "Performance" "$PERF"
+          update_badge "lighthouse-accessibility.json" "Accessibility" "$A11Y"
+          update_badge "lighthouse-best-practices.json" "Best Practices" "$BP"
+          update_badge "lighthouse-seo.json" "SEO" "$SEO"
+
+          echo "### Lighthouse Scores" >> $GITHUB_STEP_SUMMARY
+          echo "| Performance | Accessibility | Best Practices | SEO |" >> $GITHUB_STEP_SUMMARY
+          echo "|:-----------:|:------------:|:--------------:|:---:|" >> $GITHUB_STEP_SUMMARY
+          echo "| $PERF | $A11Y | $BP | $SEO |" >> $GITHUB_STEP_SUMMARY
