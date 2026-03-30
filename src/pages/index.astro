@@ -31,37 +31,40 @@ import Footer from '@components/Footer.astro';
   import { initScrollReveal } from '@scripts/observer';
   import { initNav } from '@scripts/nav';
   import { initSmoothScroll } from '@scripts/smooth-scroll';
-  import { initGSAP } from '@scripts/gsap-init';
   import { initThemeSwitcher } from '@scripts/theme-switcher';
   import { initI18n } from '@scripts/i18n';
-
   import { initCounters } from '@scripts/counter';
 
+  // Critical path — runs immediately
   initNav();
   initSmoothScroll();
   initScrollReveal();
-  initGSAP();
   initThemeSwitcher();
   initCounters();
   initI18n();
 
-  // Lazy-load magnetic hover effect
-  if ('requestIdleCallback' in window) {
-    requestIdleCallback(() => import('@scripts/magnetic-hover').then((m) => m.initMagneticHover()), { timeout: 2000 });
-  } else {
-    setTimeout(() => import('@scripts/magnetic-hover').then((m) => m.initMagneticHover()), 2000);
+  // Helper: lazy-load a module at idle time with error handling
+  function lazyLoad(loader: () => Promise<void>, timeout = 2000): void {
+    const load = () => loader().catch((e) => console.error('[lazy-load]', e));
+    if ('requestIdleCallback' in window) {
+      requestIdleCallback(() => load(), { timeout });
+    } else {
+      setTimeout(load, timeout);
+    }
   }
+
+  // Defer GSAP (165KB + ScrollTrigger 103KB) — not critical path
+  lazyLoad(() => import('@scripts/gsap-init').then((m) => m.initGSAP()));
+
+  // Lazy-load magnetic hover effect
+  lazyLoad(() => import('@scripts/magnetic-hover').then((m) => m.initMagneticHover()));
 
   // Logo morph (FYNITI ↔ infinity) — loads eagerly since first cycle is immediate
-  import('@scripts/logo-morph').then((m) => m.initLogoMorph());
+  import('@scripts/logo-morph').then((m) => m.initLogoMorph()).catch((e) => console.error('[logo-morph]', e));
 
   // Logo scramble-reveal on hover
-  import('@scripts/logo-scramble').then((m) => m.initLogoScramble());
+  import('@scripts/logo-scramble').then((m) => m.initLogoScramble()).catch((e) => console.error('[logo-scramble]', e));
 
   // Lazy-load chatbot at idle time
-  if ('requestIdleCallback' in window) {
-    requestIdleCallback(() => import('@scripts/chatbot').then((m) => m.initChatbot()), { timeout: 3000 });
-  } else {
-    setTimeout(() => import('@scripts/chatbot').then((m) => m.initChatbot()), 3000);
-  }
+  lazyLoad(() => import('@scripts/chatbot').then((m) => m.initChatbot()), 3000);
 </script>
