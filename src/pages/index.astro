@@ -31,19 +31,24 @@ import Footer from '@components/Footer.astro';
   import { initScrollReveal } from '@scripts/observer';
   import { initNav } from '@scripts/nav';
   import { initSmoothScroll } from '@scripts/smooth-scroll';
-  import { initGSAP } from '@scripts/gsap-init';
   import { initThemeSwitcher } from '@scripts/theme-switcher';
   import { initI18n } from '@scripts/i18n';
-
   import { initCounters } from '@scripts/counter';
 
+  // Critical path — runs immediately
   initNav();
   initSmoothScroll();
   initScrollReveal();
-  initGSAP();
   initThemeSwitcher();
   initCounters();
   initI18n();
+
+  // Defer GSAP (165KB + ScrollTrigger 103KB) — not critical path
+  if ('requestIdleCallback' in window) {
+    requestIdleCallback(() => import('@scripts/gsap-init').then((m) => m.initGSAP()), { timeout: 2000 });
+  } else {
+    setTimeout(() => import('@scripts/gsap-init').then((m) => m.initGSAP()), 2000);
+  }
 
   // Lazy-load magnetic hover effect
   if ('requestIdleCallback' in window) {
