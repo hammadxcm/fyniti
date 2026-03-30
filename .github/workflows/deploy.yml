@@ -8,7 +8,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: write
+  contents: read
   pages: write
   id-token: write
 
@@ -82,30 +82,61 @@ jobs:
           uploadArtifacts: true
           temporaryPublicStorage: true
 
-      - name: Generate badge data
+      - name: Update Lighthouse badges
+        uses: schneegans/dynamic-badges-action@v1.7.0
+        with:
+          auth: ${{ secrets.GIST_TOKEN }}
+          gistID: 03c7e6932b267109a1e1ab5664ca18f3
+          filename: lighthouse-performance.json
+          label: Performance
+          message: ${{ fromJSON(steps.lighthouse.outputs.manifest)[0].summary.performance >= 0.9 && '🟢' || fromJSON(steps.lighthouse.outputs.manifest)[0].summary.performance >= 0.5 && '🟠' || '🔴' }} ${{ format('{0}', fromJSON(steps.lighthouse.outputs.manifest)[0].summary.performance * 100) }}
+          valColorRange: ${{ fromJSON(steps.lighthouse.outputs.manifest)[0].summary.performance }}
+          maxColorRange: 1
+          minColorRange: 0
+
+      - name: Update Accessibility badge
+        uses: schneegans/dynamic-badges-action@v1.7.0
+        with:
+          auth: ${{ secrets.GIST_TOKEN }}
+          gistID: 03c7e6932b267109a1e1ab5664ca18f3
+          filename: lighthouse-accessibility.json
+          label: Accessibility
+          message: ${{ format('{0}', fromJSON(steps.lighthouse.outputs.manifest)[0].summary.accessibility * 100) }}
+          valColorRange: ${{ fromJSON(steps.lighthouse.outputs.manifest)[0].summary.accessibility }}
+          maxColorRange: 1
+          minColorRange: 0
+
+      - name: Update Best Practices badge
+        uses: schneegans/dynamic-badges-action@v1.7.0
+        with:
+          auth: ${{ secrets.GIST_TOKEN }}
+          gistID: 03c7e6932b267109a1e1ab5664ca18f3
+          filename: lighthouse-best-practices.json
+          label: Best Practices
+          message: ${{ format('{0}', fromJSON(steps.lighthouse.outputs.manifest)[0].summary.best-practices * 100) }}
+          valColorRange: ${{ fromJSON(steps.lighthouse.outputs.manifest)[0].summary.best-practices }}
+          maxColorRange: 1
+          minColorRange: 0
+
+      - name: Update SEO badge
+        uses: schneegans/dynamic-badges-action@v1.7.0
+        with:
+          auth: ${{ secrets.GIST_TOKEN }}
+          gistID: 03c7e6932b267109a1e1ab5664ca18f3
+          filename: lighthouse-seo.json
+          label: SEO
+          message: ${{ format('{0}', fromJSON(steps.lighthouse.outputs.manifest)[0].summary.seo * 100) }}
+          valColorRange: ${{ fromJSON(steps.lighthouse.outputs.manifest)[0].summary.seo }}
+          maxColorRange: 1
+          minColorRange: 0
+
+      - name: Summary
         run: |
-          PERF=$(echo '${{ steps.lighthouse.outputs.manifest }}' | jq '.[0].summary.performance * 100 | round')
-          A11Y=$(echo '${{ steps.lighthouse.outputs.manifest }}' | jq '.[0].summary.accessibility * 100 | round')
-          BP=$(echo '${{ steps.lighthouse.outputs.manifest }}' | jq '.[0].summary."best-practices" * 100 | round')
-          SEO=$(echo '${{ steps.lighthouse.outputs.manifest }}' | jq '.[0].summary.seo * 100 | round')
-
-          color() { if [ "$1" -ge 90 ]; then echo "brightgreen"; elif [ "$1" -ge 50 ]; then echo "orange"; else echo "red"; fi; }
-
-          mkdir -p .github/badges
-          echo "{\"schemaVersion\":1,\"label\":\"Performance\",\"message\":\"${PERF}\",\"color\":\"$(color $PERF)\"}" > .github/badges/lighthouse-performance.json
-          echo "{\"schemaVersion\":1,\"label\":\"Accessibility\",\"message\":\"${A11Y}\",\"color\":\"$(color $A11Y)\"}" > .github/badges/lighthouse-accessibility.json
-          echo "{\"schemaVersion\":1,\"label\":\"Best Practices\",\"message\":\"${BP}\",\"color\":\"$(color $BP)\"}" > .github/badges/lighthouse-best-practices.json
-          echo "{\"schemaVersion\":1,\"label\":\"SEO\",\"message\":\"${SEO}\",\"color\":\"$(color $SEO)\"}" > .github/badges/lighthouse-seo.json
-
-          echo "### Lighthouse Scores" >> $GITHUB_STEP_SUMMARY
-          echo "| Performance | Accessibility | Best Practices | SEO |" >> $GITHUB_STEP_SUMMARY
-          echo "|:-----------:|:------------:|:--------------:|:---:|" >> $GITHUB_STEP_SUMMARY
-          echo "| ${PERF} | ${A11Y} | ${BP} | ${SEO} |" >> $GITHUB_STEP_SUMMARY
-
-      - name: Commit badge data
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add .github/badges/
-          git diff --cached --quiet || git commit -m "ci: update lighthouse badges [skip ci]"
-          git push || true
+          echo "### 🏠 Lighthouse Scores" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "| Category | Score |" >> $GITHUB_STEP_SUMMARY
+          echo "|----------|-------|" >> $GITHUB_STEP_SUMMARY
+          echo "| Performance | $(echo '${{ steps.lighthouse.outputs.manifest }}' | jq '.[0].summary.performance * 100 | round') |" >> $GITHUB_STEP_SUMMARY
+          echo "| Accessibility | $(echo '${{ steps.lighthouse.outputs.manifest }}' | jq '.[0].summary.accessibility * 100 | round') |" >> $GITHUB_STEP_SUMMARY
+          echo "| Best Practices | $(echo '${{ steps.lighthouse.outputs.manifest }}' | jq '.[0].summary."best-practices" * 100 | round') |" >> $GITHUB_STEP_SUMMARY
+          echo "| SEO | $(echo '${{ steps.lighthouse.outputs.manifest }}' | jq '.[0].summary.seo * 100 | round') |" >> $GITHUB_STEP_SUMMARY

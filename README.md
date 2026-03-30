@@ -7,10 +7,10 @@
 
 ### Lighthouse Scores
 
-[![Performance](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/hammadxcm/fyniti/main/.github/badges/lighthouse-performance.json)](https://github.com/hammadxcm/fyniti/actions)
-[![Accessibility](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/hammadxcm/fyniti/main/.github/badges/lighthouse-accessibility.json)](https://github.com/hammadxcm/fyniti/actions)
-[![Best Practices](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/hammadxcm/fyniti/main/.github/badges/lighthouse-best-practices.json)](https://github.com/hammadxcm/fyniti/actions)
-[![SEO](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/hammadxcm/fyniti/main/.github/badges/lighthouse-seo.json)](https://github.com/hammadxcm/fyniti/actions)
+[![Performance](https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/hammadxcm/03c7e6932b267109a1e1ab5664ca18f3/raw/lighthouse-performance.json)](https://github.com/hammadxcm/fyniti/actions)
+[![Accessibility](https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/hammadxcm/03c7e6932b267109a1e1ab5664ca18f3/raw/lighthouse-accessibility.json)](https://github.com/hammadxcm/fyniti/actions)
+[![Best Practices](https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/hammadxcm/03c7e6932b267109a1e1ab5664ca18f3/raw/lighthouse-best-practices.json)](https://github.com/hammadxcm/fyniti/actions)
+[![SEO](https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/hammadxcm/03c7e6932b267109a1e1ab5664ca18f3/raw/lighthouse-seo.json)](https://github.com/hammadxcm/fyniti/actions)
 
 > **Live:** [fyniti.co.uk](https://fyniti.co.uk)
 
