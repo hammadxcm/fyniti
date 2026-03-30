@@ -5,6 +5,13 @@
 [![Astro](https://img.shields.io/badge/Astro-6.x-FF5D01?logo=astro&logoColor=white)](https://astro.build)
 [![License](https://img.shields.io/badge/license-Private-red)](#)
 
+### Lighthouse Scores
+
+[![Performance](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/hammadxcm/fyniti/main/.github/badges/lighthouse-performance.json)](https://github.com/hammadxcm/fyniti/actions)
+[![Accessibility](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/hammadxcm/fyniti/main/.github/badges/lighthouse-accessibility.json)](https://github.com/hammadxcm/fyniti/actions)
+[![Best Practices](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/hammadxcm/fyniti/main/.github/badges/lighthouse-best-practices.json)](https://github.com/hammadxcm/fyniti/actions)
+[![SEO](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/hammadxcm/fyniti/main/.github/badges/lighthouse-seo.json)](https://github.com/hammadxcm/fyniti/actions)
+
 > **Live:** [fyniti.co.uk](https://fyniti.co.uk)
 
 Corporate website for FYNITI — a UK-based IT solutions company delivering software development, cloud infrastructure, and digital experiences.
