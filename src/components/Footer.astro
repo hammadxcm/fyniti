@@ -15,14 +15,18 @@ import { siteConfig, footerLinks } from '@data/site';
       <!-- Column 1: Brand -->
       <div class="footer-brand">
         <a href="#" class="footer-logo" aria-label="FYNITI home">
-          <svg class="footer-logo-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 80" fill="currentColor" overflow="visible" aria-label="FYNITI">
-            <rect x="0" y="0" width="56" height="12"/><rect x="0" y="0" width="12" height="80"/><rect x="0" y="34" width="40" height="12"/>
-            <rect x="76" y="0" width="12" height="28"/><rect x="120" y="0" width="12" height="28"/><rect x="86" y="22" width="14" height="12"/><rect x="108" y="22" width="14" height="12"/><rect x="96" y="32" width="16" height="48"/>
-            <rect x="152" y="0" width="12" height="80"/><rect x="208" y="0" width="12" height="80"/><rect x="164" y="8" width="12" height="14"/><rect x="174" y="20" width="12" height="14"/><rect x="184" y="32" width="12" height="14"/><rect x="196" y="44" width="12" height="14"/>
-            <rect x="240" y="0" width="12" height="80"/>
-            <rect x="272" y="0" width="56" height="12"/><rect x="294" y="0" width="12" height="80"/>
-            <rect x="348" y="0" width="12" height="80"/>
-          </svg>
+          <div class="footer-logo-wrap">
+            <svg class="footer-logo-svg morph-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 80" fill="currentColor" overflow="visible" aria-label="FYNITI">
+              <!-- F --><path class="morph-path" d="M0 0L56 0L56 12L0 12Z"/><path class="morph-path" d="M0 0L12 0L12 80L0 80Z"/><path class="morph-path" d="M0 34L40 34L40 46L0 46Z"/>
+              <!-- Y --><path class="morph-path" d="M76 0L88 0L88 28L76 28Z"/><path class="morph-path" d="M120 0L132 0L132 28L120 28Z"/><path class="morph-path" d="M86 22L100 22L100 34L86 34Z"/><path class="morph-path" d="M108 22L122 22L122 34L108 34Z"/><path class="morph-path" d="M96 32L112 32L112 80L96 80Z"/>
+              <!-- N --><path class="morph-path" d="M152 0L164 0L164 80L152 80Z"/><path class="morph-path" d="M208 0L220 0L220 80L208 80Z"/><path class="morph-path" d="M164 8L176 8L176 22L164 22Z"/><path class="morph-path" d="M174 20L186 20L186 34L174 34Z"/><path class="morph-path" d="M184 32L196 32L196 46L184 46Z"/><path class="morph-path" d="M196 44L208 44L208 58L196 58Z"/>
+              <!-- I --><path class="morph-path" d="M240 0L252 0L252 80L240 80Z"/>
+              <!-- T --><path class="morph-path" d="M272 0L328 0L328 12L272 12Z"/><path class="morph-path" d="M294 0L306 0L306 80L294 80Z"/>
+              <!-- I --><path class="morph-path" d="M348 0L360 0L360 80L348 80Z"/>
+              <!-- Energy pulse -->
+              <path class="morph-pulse" d="M180 40C206.3 24 232.5 8 270 8C303.1 8 330 22.3 330 40C330 57.7 303.1 72 270 72C232.5 72 206.3 56 180 40C153.8 24 127.5 8 90 8C56.9 8 30 22.3 30 40C30 57.7 56.9 72 90 72C127.5 72 153.8 56 180 40Z" fill="none" stroke="var(--color-brand)" stroke-width="3" stroke-linecap="round" pathLength="1"/>
+            </svg>
+          </div>
         </a>
         <p class="text-text-secondary text-sm leading-relaxed mt-3 mb-5">
           {siteConfig.tagline}. Delivering innovative IT solutions that empower businesses to thrive in the digital age.
@@ -171,21 +175,58 @@ import { siteConfig, footerLinks } from '@data/site';
   }
 
   /* ── Brand column ── */
-  .footer-logo-svg {
+  .footer-logo {
+    text-decoration: none;
+    display: inline-block;
+  }
+
+  .footer-logo-wrap {
+    position: relative;
     height: 22px;
-    width: auto;
-    color: var(--color-brand);
+    animation: footerLogoGlow 4s ease-in-out infinite;
     transition: filter 0.3s ease;
   }
 
-  .footer-logo:hover .footer-logo-svg {
+  .footer-logo:hover .footer-logo-wrap {
     filter: drop-shadow(0 0 6px var(--color-brand))
             drop-shadow(0 0 12px var(--color-brand));
   }
 
-  .footer-logo {
-    text-decoration: none;
-    display: inline-block;
+  .footer-logo-svg {
+    height: 22px;
+    width: auto;
+  }
+
+  .footer-logo-svg .morph-path {
+    fill: var(--color-brand);
+    stroke: var(--color-brand);
+    stroke-width: 0;
+    transition: fill 0.3s ease, stroke-width 0.3s ease, filter 0.3s ease;
+  }
+
+  .footer-logo-svg .morph-path.is-hollow {
+    fill: none;
+    stroke-width: 5;
+    filter: drop-shadow(0 0 4px var(--color-brand))
+            drop-shadow(0 0 8px color-mix(in srgb, var(--color-brand) 30%, transparent));
+  }
+
+  .footer-logo-svg .morph-pulse {
+    stroke-dasharray: 0.12 0.88;
+    opacity: 0;
+    filter: drop-shadow(0 0 6px var(--color-brand));
+    animation: footerPulseFlow 1s linear infinite;
+    transition: opacity 0.4s ease;
+  }
+
+  @keyframes footerPulseFlow {
+    from { stroke-dashoffset: 0; }
+    to { stroke-dashoffset: -1; }
+  }
+
+  @keyframes footerLogoGlow {
+    0%, 100% { filter: drop-shadow(0 0 0px transparent); }
+    50% { filter: drop-shadow(0 0 4px var(--color-brand)); }
   }
 
   .social-links {
