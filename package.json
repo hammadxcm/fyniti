@@ -17,10 +17,10 @@
     "format": "biome check --write src/"
   },
   "dependencies": {
-    "@astrojs/sitemap": "^3.3.1",
+    "@astrojs/sitemap": "^3.7.3",
     "@lucide/astro": "^1.7.0",
     "@tailwindcss/vite": "^4.2.2",
-    "astro": "~6.1.10",
+    "astro": "^7.1.5",
     "flubber": "^0.4.2",
     "gsap": "^3.12.7",
     "tailwindcss": "^4.2.2"
@@ -33,13 +33,15 @@
   },
   "pnpm": {
     "overrides": {
-      "astro": "~6.1.10",
+      "astro": "^7.1.5",
       "defu": ">=6.1.5",
       "devalue": "^5.8.1",
       "esbuild": "^0.28.1",
-      "postcss": "^8.5.10",
-      "vite": "~7.3.2",
-      "js-yaml": "^4.3.0"
+      "postcss": "^8.5.18",
+      "vite": "^8.1.5",
+      "js-yaml": "^4.3.0",
+      "sharp": "^0.35.0",
+      "svgo": "^4.0.2"
     }
   }
 }
