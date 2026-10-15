@@ -9,8 +9,6 @@ on:
 
 permissions:
   contents: read
-  pages: write
-  id-token: write
 
 concurrency:
   group: pages-${{ github.ref }}
@@ -24,9 +22,11 @@ jobs:
     name: Lint
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6
-      - uses: pnpm/action-setup@v5
-      - uses: actions/setup-node@v6
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: pnpm/action-setup@ea17c68df8912ef543352723c149a84f56e3d413 # v6.1.0
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
           node-version: ${{ env.NODE_VERSION }}
           cache: pnpm
@@ -38,18 +38,19 @@ jobs:
     needs: lint
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6
-      - uses: pnpm/action-setup@v5
-      - uses: actions/setup-node@v6
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: pnpm/action-setup@ea17c68df8912ef543352723c149a84f56e3d413 # v6.1.0
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
           node-version: ${{ env.NODE_VERSION }}
-          cache: pnpm
       - run: pnpm install --frozen-lockfile
       - name: Build Astro site
         run: pnpm build
         env:
           PUBLIC_WEB3FORMS_KEY: ${{ secrets.PUBLIC_WEB3FORMS_KEY }}
-      - uses: actions/upload-pages-artifact@v4
+      - uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5.0.0
         with:
           path: dist/
 
@@ -58,12 +59,15 @@ jobs:
     needs: build
     if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
     runs-on: ubuntu-latest
+    permissions:
+      pages: write # deploy-pages publishes the site
+      id-token: write # OIDC token required by deploy-pages
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - id: deployment
-        uses: actions/deploy-pages@v5
+        uses: actions/deploy-pages@368f82528645a54fb793d4d04e342629a3f51346 # v5.0.1
 
   lighthouse:
     name: Lighthouse Audit
@@ -71,11 +75,13 @@ jobs:
     if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
 
       - name: Run Lighthouse
         id: lighthouse
-        uses: treosh/lighthouse-ci-action@v12
+        uses: treosh/lighthouse-ci-action@3e7e23fb74242897f95c0ba9cabad3d0227b9b18 # 12.6.2
         with:
           urls: |
             https://fyniti.co.uk
@@ -100,7 +106,7 @@ jobs:
             local file="$1" label="$2" score="$3"
             curl -s -X PATCH "https://api.github.com/gists/$GIST_ID" \
               -H "Authorization: token $GIST_TOKEN" \
-              -d "{\"files\":{\"$file\":{\"content\":\"{\\\"schemaVersion\\\":1,\\\"label\\\":\\\"$label\\\",\\\"message\\\":\\\"$score\\\",\\\"color\\\":\\\"$(color $score)\\\"}\"}}}" > /dev/null
+              -d "{\"files\":{\"$file\":{\"content\":\"{\\\"schemaVersion\\\":1,\\\"label\\\":\\\"$label\\\",\\\"message\\\":\\\"$score\\\",\\\"color\\\":\\\"$(color "$score")\\\"}\"}}}" > /dev/null
           }
 
           update_badge "lh-perf.json" "Performance" "$PERF"
@@ -108,7 +114,9 @@ jobs:
           update_badge "lh-bp.json" "Best Practices" "$BP"
           update_badge "lh-seo.json" "SEO" "$SEO"
 
-          echo "### Lighthouse Scores" >> $GITHUB_STEP_SUMMARY
-          echo "| Performance | Accessibility | Best Practices | SEO |" >> $GITHUB_STEP_SUMMARY
-          echo "|:-----------:|:------------:|:--------------:|:---:|" >> $GITHUB_STEP_SUMMARY
-          echo "| $PERF | $A11Y | $BP | $SEO |" >> $GITHUB_STEP_SUMMARY
+          {
+            echo "### Lighthouse Scores"
+            echo "| Performance | Accessibility | Best Practices | SEO |"
+            echo "|:-----------:|:------------:|:--------------:|:---:|"
+            echo "| $PERF | $A11Y | $BP | $SEO |"
+          } >> "$GITHUB_STEP_SUMMARY"
