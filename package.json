@@ -4,7 +4,7 @@
   "version": "1.0.1",
   "private": true,
   "engines": {
-    "node": ">=22.22.0"
+    "node": ">=22.23.4"
   },
   "packageManager": "pnpm@10.30.1",
   "scripts": {
@@ -17,10 +17,10 @@
     "format": "biome check --write src/"
   },
   "dependencies": {
-    "@astrojs/sitemap": "^3.7.3",
+    "@astrojs/sitemap": "^3.7.6",
     "@lucide/astro": "^1.7.0",
     "@tailwindcss/vite": "^4.2.2",
-    "astro": "^7.4.0",
+    "astro": "^7.4.13",
     "flubber": "^0.4.2",
     "gsap": "^3.12.7",
     "tailwindcss": "^4.2.2"
@@ -33,17 +33,18 @@
   },
   "pnpm": {
     "overrides": {
-      "astro": "^7.4.0",
+      "astro": "^7.4.13",
       "defu": ">=6.1.5",
       "devalue": "^5.9.3",
       "esbuild": "^0.28.1",
       "postcss": "^8.5.18",
-      "vite": "^8.1.5",
+      "vite": "^8.1.6",
       "js-yaml": "^4.3.2",
       "sharp": "^0.35.4",
       "svgo": "^4.1.0",
       "nanoid": "^3.3.18",
-      "smol-toml": "^1.7.1"
+      "smol-toml": "^1.7.1",
+      "undici": "^8.12.2"
     }
   }
 }
