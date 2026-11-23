@@ -18,7 +18,7 @@
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.6",
-    "@lucide/astro": "^1.7.0",
+    "@lucide/astro": "^1.77.0",
     "@tailwindcss/vite": "^4.3.5",
     "astro": "^7.4.13",
     "flubber": "^0.4.2",
