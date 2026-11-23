@@ -22,7 +22,7 @@
     "@tailwindcss/vite": "^4.3.5",
     "astro": "^7.4.13",
     "flubber": "^0.4.2",
-    "gsap": "^3.12.7",
+    "gsap": "^3.15.1",
     "tailwindcss": "^4.2.2"
   },
   "devDependencies": {
