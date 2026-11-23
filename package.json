@@ -19,7 +19,7 @@
   "dependencies": {
     "@astrojs/sitemap": "^3.7.6",
     "@lucide/astro": "^1.7.0",
-    "@tailwindcss/vite": "^4.2.2",
+    "@tailwindcss/vite": "^4.3.5",
     "astro": "^7.4.13",
     "flubber": "^0.4.2",
     "gsap": "^3.12.7",
